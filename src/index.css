@@ -1,0 +1,495 @@
+/* VanTelle Luxury Design System & Global Styles */
+
+:root {
+  /* Color Tokens */
+  --color-bg-light: #F7F5F2;       /* Soft White */
+  --color-bg-warm: #EDE7DF;        /* Warm Beige */
+  --color-bg-greige: #D9D4CD;      /* Greige */
+  --color-bg-taupe: #BBA1A6;       /* Light Taupe */
+  --color-bg-dark: #1A1A1A;        /* Charcoal Dark */
+  --color-accent-blue: #57A8FF;    /* Signature Blue */
+  --color-accent-gold: #C5A880;    /* Champagne Gold */
+  
+  --color-text-dark: #1A1A1A;
+  --color-text-muted: #625E5A;
+  --color-text-light: #F7F5F2;
+  --color-text-gold: #D4B38A;
+  
+  /* Fonts */
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  
+  /* Layout & Spacing */
+  --container-max-width: 1440px;
+  --header-height: 80px;
+  --transition-smooth: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-fast: all 0.25s ease;
+  
+  /* Initial Reset Setup */
+  background-color: var(--color-bg-light);
+  color: var(--color-text-dark);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg-light);
+  color: var(--color-text-dark);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-light);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-bg-greige);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-bg-taupe);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+p {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+button, input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+}
+
+/* Utility Layout Classes */
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 4rem;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+.section-padding {
+  padding: 8rem 0;
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 5rem 0;
+  }
+}
+
+/* Luxury Flex & Grid layouts */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4rem;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4 {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+/* Luxury Editorial Typography */
+.editorial-title {
+  font-size: 3.5rem;
+  font-weight: 300;
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+}
+
+.editorial-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-accent-gold);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.editorial-tag {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  background-color: rgba(26, 26, 26, 0.05);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+@media (max-width: 768px) {
+  .editorial-title {
+    font-size: 2.5rem;
+  }
+}
+
+/* Interactive & Micro-animations */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1.2s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Luxury Interactive Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg-dark);
+  color: var(--color-bg-light);
+  padding: 1rem 2.5rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: var(--transition-smooth);
+  border: 1px solid var(--color-bg-dark);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-accent-gold);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: -1;
+}
+
+.btn-primary:hover {
+  color: var(--color-bg-dark);
+  border-color: var(--color-accent-gold);
+}
+
+.btn-primary:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: var(--color-bg-dark);
+  padding: 1rem 2.5rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: var(--transition-smooth);
+  border: 1px solid var(--color-bg-greige);
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-bg-dark);
+  background-color: rgba(26, 26, 26, 0.02);
+}
+
+.btn-accent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: var(--color-text-dark);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--color-bg-dark);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.btn-accent:hover {
+  color: var(--color-accent-gold);
+  border-bottom-color: var(--color-accent-gold);
+  padding-left: 0.5rem;
+}
+
+/* Premium Card Showcase */
+.luxury-card {
+  position: relative;
+  background-color: var(--color-bg-light);
+  overflow: hidden;
+  transition: var(--transition-smooth);
+  cursor: pointer;
+}
+
+.luxury-card-img-wrapper {
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  position: relative;
+  background-color: var(--color-bg-warm);
+}
+
+.luxury-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.luxury-card:hover .luxury-card-img {
+  transform: scale(1.05);
+}
+
+.luxury-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent 60%, rgba(26, 26, 26, 0.2));
+  opacity: 0;
+  transition: var(--transition-smooth);
+}
+
+.luxury-card:hover .luxury-card-overlay {
+  opacity: 1;
+}
+
+.luxury-card-content {
+  padding: 1.5rem 0.5rem;
+}
+
+.luxury-card-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  margin-bottom: 0.35rem;
+  font-weight: 400;
+}
+
+.luxury-card-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+}
+
+.luxury-card-price {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 400;
+  margin-top: 0.5rem;
+  color: var(--color-text-dark);
+}
+
+/* Dark Mode / VIP Sections styling */
+.dark-section {
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-light);
+}
+
+.dark-section p {
+  color: #A6A29E;
+}
+
+.dark-section .btn-secondary {
+  color: var(--color-text-light);
+  border-color: #403D3A;
+}
+
+.dark-section .btn-secondary:hover {
+  border-color: var(--color-text-light);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.dark-section .btn-accent {
+  color: var(--color-text-light);
+  border-bottom-color: var(--color-text-light);
+}
+
+.dark-section .btn-accent:hover {
+  color: var(--color-accent-gold);
+  border-bottom-color: var(--color-accent-gold);
+}
+
+.dark-section .btn-primary {
+  background-color: var(--color-bg-light);
+  color: var(--color-bg-dark);
+  border-color: var(--color-bg-light);
+}
+
+.dark-section .btn-primary::before {
+  background-color: var(--color-accent-gold);
+}
+
+.dark-section .btn-primary:hover {
+  color: var(--color-bg-dark);
+  border-color: var(--color-accent-gold);
+}
+
+/* Premium Form Elements */
+.luxury-input-group {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.luxury-input {
+  width: 100%;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--color-bg-greige);
+  transition: var(--transition-fast);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  background: transparent;
+}
+
+.dark-section .luxury-input {
+  border-bottom-color: #403D3A;
+}
+
+.luxury-input:focus {
+  outline: none;
+  border-bottom-color: var(--color-accent-gold);
+}
+
+.luxury-label {
+  position: absolute;
+  left: 0;
+  top: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--color-text-muted);
+  pointer-events: none;
+  transition: var(--transition-fast);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.dark-section .luxury-label {
+  color: #A6A29E;
+}
+
+.luxury-input:focus ~ .luxury-label,
+.luxury-input:not(:placeholder-shown) ~ .luxury-label {
+  top: -1.2rem;
+  font-size: 0.7rem;
+  color: var(--color-accent-gold);
+}
+
+/* Glassmorphism Drawer or Modal Panel */
+.glass-panel {
+  background: rgba(247, 245, 242, 0.85);
+  backdrop-filter: blur(15px) saturate(120%);
+  -webkit-backdrop-filter: blur(15px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.dark-glass-panel {
+  background: rgba(26, 26, 26, 0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Navigation Custom Scroll Indicator */
+.nav-scroll-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background-color: var(--color-accent-gold);
+  z-index: 1001;
+  transition: width 0.1s ease;
+}
