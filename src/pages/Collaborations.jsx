@@ -10,8 +10,8 @@ const COLLABORATORS_DATA = [
     quote: '"Celebrating craftsmanship, culture, storytelling, and meaningful luxury experiences."',
     aboutTitle: 'Culture. Heritage. Storytelling.',
     aboutDesc: 'Hovo Faber is a cultural curator and creative studio dedicated to preserving heritage, supporting artisans, and crafting stories that transcend time. United by a vision of slow luxury, VanTelle and Hovo Faber collaborate to bridge tactile heritage with intelligent contemporary design.',
-    imgMain: '/assets/hovofaber_collab.png',
-    imgExtra: '/assets/collection_jewellery.png',
+    imgMain: 'assets/hovofaber_collab.png',
+    imgExtra: 'assets/collection_jewellery.png',
     roles: [
       {
         title: 'Cultural Curator',
