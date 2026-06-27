@@ -39,7 +39,7 @@ export default function VIP() {
         style={{ 
           position: 'relative', 
           padding: '6rem 0 3rem 0',
-          backgroundImage: 'linear-gradient(to bottom, rgba(26,26,26,0.9) 60%, var(--color-bg-dark) 100%), url("assets/vip_background.png")',
+          backgroundImage: `linear-gradient(to bottom, rgba(26,26,26,0.9) 60%, var(--color-bg-dark) 100%), url("${import.meta.env.BASE_URL}assets/vip_background.png")`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           textAlign: 'center'

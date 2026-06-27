@@ -43,7 +43,7 @@ export default function About({ setActivePage }) {
                 }}
               >
                 <img 
-                  src="assets/vantelle_hero.png" 
+                  src={import.meta.env.BASE_URL + "assets/vantelle_hero.png"} 
                   alt="VanTelle Studio" 
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />

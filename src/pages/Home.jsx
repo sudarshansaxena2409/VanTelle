@@ -61,10 +61,10 @@ export default function Home({ setActivePage }) {
   };
 
   const collections = [
-    { id: 'fashion', label: 'Fashion', desc: 'Sartorial ease & refined silhouettes', img: 'assets/vantelle_hero.png' },
-    { id: 'jewellery', label: 'Jewellery', desc: 'Sculptured items & pure gold craftsmanship', img: 'assets/collection_jewellery.png' },
-    { id: 'homedecor', label: 'Home Décor', desc: 'Natural textures & artisan ceramics', img: 'assets/hovofaber_collab.png' },
-    { id: 'lifestyle', label: 'Lifestyle', desc: 'Curated leather details & travel elements', img: 'assets/vip_background.png' }
+    { id: 'fashion', label: 'Fashion', desc: 'Sartorial ease & refined silhouettes', img: import.meta.env.BASE_URL + 'assets/vantelle_hero.png' },
+    { id: 'jewellery', label: 'Jewellery', desc: 'Sculptured items & pure gold craftsmanship', img: import.meta.env.BASE_URL + 'assets/collection_jewellery.png' },
+    { id: 'homedecor', label: 'Home Décor', desc: 'Natural textures & artisan ceramics', img: import.meta.env.BASE_URL + 'assets/hovofaber_collab.png' },
+    { id: 'lifestyle', label: 'Lifestyle', desc: 'Curated leather details & travel elements', img: import.meta.env.BASE_URL + 'assets/vip_background.png' }
   ];
 
   return (
@@ -85,7 +85,7 @@ export default function Home({ setActivePage }) {
         {/* Background image with visual overlay */}
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}>
           <img 
-            src="assets/vantelle_hero.png" 
+            src={import.meta.env.BASE_URL + "assets/vantelle_hero.png"} 
             alt="VanTelle Home Editorial" 
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
@@ -398,7 +398,7 @@ export default function Home({ setActivePage }) {
       <section className="section-padding dark-section" style={{ position: 'relative', overflow: 'hidden' }}>
         {/* Background visual cover */}
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', opacity: 0.15, zIndex: 1 }}>
-          <img src="assets/hovofaber_collab.png" alt="Craft Detail" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          <img src={import.meta.env.BASE_URL + "assets/hovofaber_collab.png"} alt="Craft Detail" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
         
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
@@ -494,7 +494,7 @@ export default function Home({ setActivePage }) {
             {/* Story Card 1 */}
             <div className="luxury-card" onClick={() => setActivePage('stories')}>
               <div className="luxury-card-img-wrapper" style={{ aspectRatio: '16/10' }}>
-                <img src="assets/hovofaber_collab.png" alt="Artisan hands" className="luxury-card-img" />
+                <img src={import.meta.env.BASE_URL + "assets/hovofaber_collab.png"} alt="Artisan hands" className="luxury-card-img" />
               </div>
               <div className="luxury-card-content">
                 <span className="luxury-card-subtitle">Heritage</span>
@@ -506,7 +506,7 @@ export default function Home({ setActivePage }) {
             {/* Story Card 2 */}
             <div className="luxury-card" onClick={() => setActivePage('stories')}>
               <div className="luxury-card-img-wrapper" style={{ aspectRatio: '16/10' }}>
-                <img src="assets/vip_background.png" alt="Luxury interior" className="luxury-card-img" />
+                <img src={import.meta.env.BASE_URL + "assets/vip_background.png"} alt="Luxury interior" className="luxury-card-img" />
               </div>
               <div className="luxury-card-content">
                 <span className="luxury-card-subtitle">Architecture</span>
@@ -518,7 +518,7 @@ export default function Home({ setActivePage }) {
             {/* Story Card 3 */}
             <div className="luxury-card" onClick={() => setActivePage('stories')}>
               <div className="luxury-card-img-wrapper" style={{ aspectRatio: '16/10' }}>
-                <img src="assets/collection_jewellery.png" alt="Jewellery curation" className="luxury-card-img" />
+                <img src={import.meta.env.BASE_URL + "assets/collection_jewellery.png"} alt="Jewellery curation" className="luxury-card-img" />
               </div>
               <div className="luxury-card-content">
                 <span className="luxury-card-subtitle">Craftsmanship</span>

@@ -9,7 +9,7 @@ const JOURNAL_POSTS = [
     subtitle: 'Preserving raw hand-weaving techniques in the Lombardy hills.',
     date: 'June 2026',
     author: 'Editorial Board',
-    img: 'assets/hovofaber_collab.png',
+    img: import.meta.env.BASE_URL + 'assets/hovofaber_collab.png',
     readTime: '6 Min Read',
     paragraphs: [
       "In the rolling topography of Lombardy, north of Milan, stands a brick workshop where the sound of wooden looms has remained unchanged for three generations. Here, quiet luxury is not a marketing catchphrase; it is a physical chore. Master weavers guide threads of fine cashmere and raw organic silk to construct textiles that have a texture impossible to duplicate on automated factory lines.",
@@ -25,7 +25,7 @@ const JOURNAL_POSTS = [
     subtitle: 'How architectural forms dictate the textures of modern clothing.',
     date: 'May 2026',
     author: 'Hovo Faber',
-    img: 'assets/vip_background.png',
+    img: import.meta.env.BASE_URL + 'assets/vip_background.png',
     readTime: '8 Min Read',
     paragraphs: [
       "There is a silent dialogue between the environments we inhabit and the objects we wear. When we look at the clean, geometric sweeps of Brutalist architecture—the textured raw concrete, the shadow gaps, the honest expression of structure—we find a visual philosophy that translates directly into modern tailoring.",
@@ -41,7 +41,7 @@ const JOURNAL_POSTS = [
     subtitle: 'Drafting jewellery directly from organic eroded coastal shapes.',
     date: 'April 2026',
     author: 'Elena Rossi',
-    img: 'assets/collection_jewellery.png',
+    img: import.meta.env.BASE_URL + 'assets/collection_jewellery.png',
     readTime: '5 Min Read',
     paragraphs: [
       "Along the wind-swept coastlines of Devon and Cornwall, the tides perform a daily masterclass in design. Pebbles are rounded to soft, asymmetrical curves, cliffs are chiseled into dramatic geometry, and sands are left with fluid ripples. These natural, imperfect shapes form the visual inspiration behind VanTelle's fine jewellery.",
@@ -57,7 +57,7 @@ const JOURNAL_POSTS = [
     subtitle: 'Selecting ceramics that elevate light and shadow within minimal environments.',
     date: 'March 2026',
     author: 'Editorial Board',
-    img: 'assets/hovofaber_collab.png',
+    img: import.meta.env.BASE_URL + 'assets/hovofaber_collab.png',
     readTime: '4 Min Read',
     paragraphs: [
       "A room is defined not by its walls, but by the objects that capture its light. In minimalist interiors, a single hand-thrown ceramic vase or carved travertine bowl acts as a visual anchor, casting soft shadows and drawing the eye to textures of clay and stone.",
@@ -73,7 +73,7 @@ const JOURNAL_POSTS = [
     subtitle: 'How AI algorithms collaborate with human body measurements to create a lasting garment.',
     date: 'February 2026',
     author: 'Tech & Style Lab',
-    img: 'assets/vantelle_hero.png',
+    img: import.meta.env.BASE_URL + 'assets/vantelle_hero.png',
     readTime: '7 Min Read',
     paragraphs: [
       "The traditional tailoring pattern was hand-drawn in chalk. Today, VanTelle's AI personalization engine drafts that pattern using multidimensional digital inputs. By analyzing fit preferences, shoulder angles, and styling habits, we map a unique garment architecture that fits you perfectly.",
