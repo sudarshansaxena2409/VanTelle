@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Search, User, ShoppingBag, Menu, X } from 'lucide-react';
+import { siteConfig } from '../config/siteConfig';
 
 export default function Navbar({ activePage, setActivePage }) {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -17,15 +18,7 @@ export default function Navbar({ activePage, setActivePage }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About Us' },
-    { id: 'collections', label: 'Collections' },
-    { id: 'stories', label: 'Stories' },
-    { id: 'vip', label: 'VIP Membership' },
-    { id: 'collaborations', label: 'Collaborations' },
-    { id: 'contact', label: 'Contact' }
-  ];
+  const navLinks = siteConfig.navbarLinks;
 
   const handleNavClick = (pageId) => {
     setActivePage(pageId);
@@ -64,12 +57,12 @@ export default function Navbar({ activePage, setActivePage }) {
         style={{
           fontFamily: 'var(--font-serif)',
           fontSize: '1.65rem',
-          letterSpacing: '0.25em',
+          letterSpacing: '0.12em',
           cursor: 'pointer',
           fontWeight: '300'
         }}
       >
-        VAN TELLE
+        VanTelle
       </div>
 
       {/* Navigation Links */}

@@ -42,10 +42,10 @@ export default function Footer({ setActivePage }) {
             <h3 style={{ 
               fontFamily: 'var(--font-serif)', 
               fontSize: '1.8rem', 
-              letterSpacing: '0.2em',
+              letterSpacing: '0.12em',
               color: 'var(--color-text-light)'
             }}>
-              VAN TELLE
+              VanTelle
             </h3>
             <p style={{ color: '#A6A29E', fontSize: '0.9rem', fontWeight: '300', maxWidth: '300px' }}>
               Blending emotion with intelligence, crafted to deliver memorable luxury lifestyle experiences.
