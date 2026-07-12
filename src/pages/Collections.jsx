@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Filter, SlidersHorizontal, Heart, Plus, Minus, X, Check, Star } from 'lucide-react';
+import { Heart, X } from 'lucide-react';
 
 const PRODUCT_DATABASE = [
   // Jewellery
@@ -201,34 +201,17 @@ const PRODUCT_DATABASE = [
   }
 ];
 
-export default function Collections() {
+export default function Collections({ setActivePage }) {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [cartQuantity, setCartQuantity] = useState(1);
-  const [addedToBag, setAddedToBag] = useState(false);
-  const [sortOrder, setSortOrder] = useState('newest');
 
   const categories = ['All', 'Jewellery', 'Fashion', 'Home Décor'];
 
   const filteredProducts = PRODUCT_DATABASE
-    .filter(p => selectedCategory === 'All' || p.category === selectedCategory)
-    .sort((a, b) => {
-      if (sortOrder === 'price-low') return a.price - b.price;
-      if (sortOrder === 'price-high') return b.price - a.price;
-      return 0; // Default order
-    });
+    .filter(p => selectedCategory === 'All' || p.category === selectedCategory);
 
   const handleProductClick = (product) => {
     setSelectedProduct(product);
-    setCartQuantity(1);
-    setAddedToBag(false);
-  };
-
-  const handleAddToBag = () => {
-    setAddedToBag(true);
-    setTimeout(() => {
-      setAddedToBag(false);
-    }, 2000);
   };
 
   // Get similar products for recommendation
@@ -287,33 +270,9 @@ export default function Collections() {
             ))}
           </div>
 
-          {/* Sort Controls */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-              <SlidersHorizontal size={14} />
-              <span>Sort By</span>
-            </div>
-            <select
-              value={sortOrder}
-              onChange={(e) => setSortOrder(e.target.value)}
-              style={{
-                fontSize: '0.8rem',
-                letterSpacing: '0.05em',
-                padding: '0.4rem 1rem',
-                border: '1px solid var(--color-bg-greige)',
-                borderRadius: '4px',
-                backgroundColor: 'var(--color-bg-light)',
-                cursor: 'pointer',
-                outline: 'none'
-              }}
-            >
-              <option value="newest">Featured</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-            </select>
-            <span style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', letterSpacing: '0.05em' }}>
-              {filteredProducts.length} Products
-            </span>
+          {/* Product Count */}
+          <div style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', letterSpacing: '0.05em' }}>
+            {filteredProducts.length} Products
           </div>
         </div>
       </section>
@@ -484,52 +443,19 @@ export default function Collections() {
                     <div><strong>Crafting Details:</strong> <span style={{ color: 'var(--color-text-muted)', fontWeight: '300' }}>{selectedProduct.details}</span></div>
                   </div>
 
-                  {/* Quantity selector and checkout buttons */}
-                  <div style={{ borderTop: '1px solid rgba(26,26,26,0.06)', paddingTop: '1.5rem', marginTop: '1rem' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', marginBottom: '1.5rem' }}>
-                      <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-text-muted)' }}>Quantity</span>
-                      <div style={{ display: 'flex', alignItems: 'center', border: '1px solid var(--color-bg-greige)', borderRadius: '2px' }}>
-                        <button 
-                          onClick={() => cartQuantity > 1 && setCartQuantity(cartQuantity - 1)}
-                          style={{ padding: '0.5rem 0.75rem', cursor: 'pointer' }}
-                        >
-                          <Minus size={12} />
-                        </button>
-                        <span style={{ padding: '0 1rem', fontSize: '0.85rem', fontWeight: '500' }}>{cartQuantity}</span>
-                        <button 
-                          onClick={() => setCartQuantity(cartQuantity + 1)}
-                          style={{ padding: '0.5rem 0.75rem', cursor: 'pointer' }}
-                        >
-                          <Plus size={12} />
-                        </button>
-                      </div>
-                    </div>
-
-                    <div style={{ display: 'flex', gap: '1rem' }}>
-                      <button 
-                        onClick={handleAddToBag}
-                        className="btn-primary"
-                        style={{ flex: 1, padding: '1rem' }}
-                      >
-                        {addedToBag ? (
-                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}><Check size={14} /> Added to Bag</span>
-                        ) : 'Add to Bag'}
-                      </button>
-                      <button 
-                        style={{ 
-                          padding: '1rem', 
-                          border: '1px solid var(--color-bg-greige)', 
-                          borderRadius: '2px', 
-                          display: 'flex', 
-                          alignItems: 'center', 
-                          justifyContent: 'center',
-                          cursor: 'pointer'
-                        }}
-                        onClick={() => alert(`${selectedProduct.name} added to your wishlist.`)}
-                      >
-                        <Heart size={16} />
-                      </button>
-                    </div>
+                  {/* Luxury Inquire block (replacing cart checkout) */}
+                  <div style={{ borderTop: '1px solid rgba(26,26,26,0.06)', paddingTop: '1.5rem', marginTop: '1.5rem' }}>
+                    <button 
+                      onClick={() => {
+                        setSelectedProduct(null);
+                        setActivePage('contact');
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
+                      className="btn-primary"
+                      style={{ width: '100%', padding: '1rem', textAlign: 'center' }}
+                    >
+                      Inquire via Concierge
+                    </button>
                   </div>
                 </div>
 

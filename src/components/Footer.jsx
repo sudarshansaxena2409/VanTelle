@@ -1,17 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 export default function Footer({ setActivePage }) {
-  const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (email) {
-      setSubscribed(true);
-      setEmail('');
-    }
-  };
-
   const handleLinkClick = (pageId) => {
     setActivePage(pageId);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -50,56 +39,6 @@ export default function Footer({ setActivePage }) {
             <p style={{ color: '#A6A29E', fontSize: '0.9rem', fontWeight: '300', maxWidth: '300px' }}>
               Blending emotion with intelligence, crafted to deliver memorable luxury lifestyle experiences.
             </p>
-            
-            {/* Newsletter form */}
-            <form onSubmit={handleSubmit} style={{ marginTop: '1rem' }}>
-              <p style={{ 
-                fontFamily: 'var(--font-sans)', 
-                fontSize: '0.75rem', 
-                textTransform: 'uppercase', 
-                letterSpacing: '0.15em',
-                color: 'var(--color-accent-gold)',
-                marginBottom: '0.75rem'
-              }}>
-                Subscribe to our newsletter
-              </p>
-              {subscribed ? (
-                <p style={{ color: 'var(--color-accent-gold)', fontSize: '0.85rem' }}>
-                  Thank you. Welcome to VanTelle's exclusive circle.
-                </p>
-              ) : (
-                <div style={{ display: 'flex', borderBottom: '1px solid #403D3A', paddingBottom: '0.5rem', width: '100%' }}>
-                  <input
-                    type="email"
-                    placeholder="ENTER YOUR EMAIL"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    style={{
-                      flex: 1,
-                      fontSize: '0.75rem',
-                      letterSpacing: '0.1em',
-                      backgroundColor: 'transparent',
-                      border: 'none',
-                      color: 'var(--color-text-light)',
-                      outline: 'none'
-                    }}
-                  />
-                  <button 
-                    type="submit" 
-                    style={{ 
-                      fontSize: '0.75rem', 
-                      letterSpacing: '0.15em', 
-                      color: 'var(--color-accent-gold)',
-                      fontWeight: '500',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    JOIN
-                  </button>
-                </div>
-              )}
-            </form>
           </div>
 
           {/* Directory */}
@@ -134,7 +73,6 @@ export default function Footer({ setActivePage }) {
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.85rem', fontWeight: '300' }}>
               <li><button onClick={() => handleLinkClick('about')} style={{ cursor: 'pointer', color: '#A6A29E' }}>Our Story</button></li>
-              <li><button onClick={() => handleLinkClick('about')} style={{ cursor: 'pointer', color: '#A6A29E' }}>AI + Human Personalisation</button></li>
               <li><button onClick={() => handleLinkClick('about')} style={{ cursor: 'pointer', color: '#A6A29E' }}>Ecosystem & Values</button></li>
               <li><button onClick={() => handleLinkClick('contact')} style={{ cursor: 'pointer', color: '#A6A29E' }}>Contact</button></li>
             </ul>

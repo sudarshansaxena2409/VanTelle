@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, User, ShoppingBag, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { siteConfig } from '../config/siteConfig';
 
 export default function Navbar({ activePage, setActivePage }) {
@@ -118,23 +118,13 @@ export default function Navbar({ activePage, setActivePage }) {
           gap: '1.75rem'
         }}
       >
-        <button aria-label="Search" style={{ cursor: 'pointer' }}>
-          <Search size={18} strokeWidth={1.5} />
-        </button>
+        {/* Mobile Room Access Shortcut */}
         <button 
           onClick={() => handleNavClick('vip')} 
-          aria-label="Profile" 
-          style={{ cursor: 'pointer', color: activePage === 'vip' ? 'var(--color-accent-gold)' : 'inherit' }}
+          className="btn-accent"
+          style={{ fontSize: '0.75rem', padding: '0.4rem 1rem', display: 'flex', alignItems: 'center' }}
         >
-          <User size={18} strokeWidth={1.5} />
-        </button>
-        <button 
-          onClick={() => handleNavClick('collections')}
-          aria-label="Shopping Bag" 
-          style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.25rem' }}
-        >
-          <ShoppingBag size={18} strokeWidth={1.5} />
-          <span style={{ fontSize: '0.7rem', fontWeight: '400', fontFamily: 'var(--font-sans)', transform: 'translateY(1px)' }}>(0)</span>
+          VIP Lounge
         </button>
 
 

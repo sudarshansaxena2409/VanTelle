@@ -36,7 +36,7 @@ function App() {
       case 'about':
         return <About setActivePage={setActivePage} />;
       case 'collections':
-        return <Collections />;
+        return <Collections setActivePage={setActivePage} />;
       case 'collaborations':
         return <Collaborations setActivePage={setActivePage} />;
       case 'stories':
