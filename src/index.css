@@ -1,23 +1,25 @@
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700&display=swap');
+
 /* VanTelle Luxury Design System & Global Styles */
 
 :root {
-  /* Color Tokens */
+  /* Color Tokens per VanTelle Brand Guidelines */
   --color-bg-light: #F7F5F2;       /* Soft White */
   --color-bg-warm: #EDE7DF;        /* Warm Beige */
-  --color-bg-greige: #D9D4CD;      /* Greige */
+  --color-bg-greige: #eaeaea;      /* Mid grey from brand guidelines (#eaeaea) */
   --color-bg-taupe: #BBA1A6;       /* Light Taupe */
-  --color-bg-dark: #1A1A1A;        /* Charcoal Dark */
-  --color-accent-blue: #57A8FF;    /* Signature Blue */
-  --color-accent-gold: #C5A880;    /* Champagne Gold */
+  --color-bg-dark: #141414;        /* Charcoal Dark from brand guidelines */
+  --color-accent-blue: #97ABFF;    /* Signature Blue from brand guidelines (#97ABFF) */
+  --color-accent-gold: #C5A880;    /* Champagne Accent */
   
-  --color-text-dark: #1A1A1A;
+  --color-text-dark: #141414;
   --color-text-muted: #625E5A;
   --color-text-light: #F7F5F2;
   --color-text-gold: #D4B38A;
   
-  /* Fonts */
+  /* Fonts: Satoshi & Cormorant Garamond per Brand Guidelines */
   --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Satoshi', 'Inter', system-ui, -apple-system, sans-serif;
   
   /* Layout & Spacing */
   --container-max-width: 1440px;

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Check, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Check, Send, Globe, Building } from 'lucide-react';
+import { siteConfig } from '../config/siteConfig';
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
@@ -16,7 +17,7 @@ export default function Contact() {
       setTimeout(() => {
         setSubmitted(false);
         setFormData({ name: '', email: '', subject: '', message: '' });
-      }, 3000);
+      }, 4000);
     }
   };
 
@@ -26,12 +27,12 @@ export default function Contact() {
       {/* Header section */}
       <section style={{ padding: '4rem 0 2rem 0', backgroundColor: 'var(--color-bg-light)' }}>
         <div className="container" style={{ textAlign: 'center' }}>
-          <span className="editorial-subtitle">Let's Connect</span>
-          <h1 className="editorial-title" style={{ fontSize: '3rem', marginBottom: '1.5rem' }}>
+          <span className="editorial-subtitle">Direct Correspondence</span>
+          <h1 className="editorial-title" style={{ fontSize: '3.4rem', marginBottom: '1.25rem' }}>
             Concierge & Inquiries
           </h1>
-          <p style={{ maxWidth: '600px', margin: '0 auto', fontSize: '0.95rem' }}>
-            Our concierge team is available to assist you with custom orders, sizing appointments, collaboration opportunities, or general inquiries.
+          <p style={{ maxWidth: '640px', margin: '0 auto', fontSize: '1rem', color: 'var(--color-text-muted)', lineHeight: '1.8' }}>
+            We welcome inquiries regarding bespoke curations, artisan partnerships, or collection specifications. A dedicated VanTelle liaison will reply within 24 hours.
           </p>
         </div>
       </section>
@@ -41,61 +42,102 @@ export default function Contact() {
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '5rem', alignItems: 'flex-start' }} className="contact-split">
             
-            {/* Left Contact Info */}
+            {/* Left Contact & Corporate Info (Document Section 6) */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
               <div>
-                <span className="editorial-subtitle">Contact Details</span>
-                <h2 style={{ fontSize: '2.2rem', marginBottom: '1.5rem' }}>Get in Touch</h2>
-                <p style={{ lineHeight: '1.8' }}>
-                  Please feel free to connect with us through any of the channels below. We endeavor to reply to all formal correspondence within 24 hours.
+                <span className="editorial-subtitle">Company Details</span>
+                <h2 style={{ fontSize: '2.4rem', marginBottom: '1.25rem', fontFamily: 'var(--font-serif)' }}>
+                  Connect with VanTelle
+                </h2>
+                <p style={{ lineHeight: '1.8', color: 'var(--color-text-muted)', fontSize: '0.95rem' }}>
+                  Whether discussing collaborations, private acquisitions, or styling inquiries, our liaison team provides discreet, personalized assistance.
                 </p>
               </div>
 
-              {/* Cards list */}
+              {/* Cards list matching Document Section 6 */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'center' }}>
+                
+                {/* Corporate Entity */}
+                <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'flex-start' }}>
+                  <div style={{ padding: '0.75rem', backgroundColor: 'var(--color-bg-warm)', borderRadius: '50%', color: 'var(--color-accent-gold)', display: 'flex' }}>
+                    <Building size={18} />
+                  </div>
+                  <div>
+                    <span style={{ fontSize: '0.65rem', textTransform: 'uppercase', color: 'var(--color-text-muted)', letterSpacing: '0.12em', display: 'block', marginBottom: '0.2rem' }}>
+                      Corporate Entity
+                    </span>
+                    <span style={{ fontSize: '1rem', color: 'var(--color-text-dark)', fontWeight: '500', display: 'block' }}>
+                      {siteConfig.companyName}
+                    </span>
+                    <span style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)' }}>
+                      {siteConfig.operatingPresence}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Corporate Email */}
+                <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'flex-start' }}>
                   <div style={{ padding: '0.75rem', backgroundColor: 'var(--color-bg-warm)', borderRadius: '50%', color: 'var(--color-accent-gold)', display: 'flex' }}>
                     <Mail size={18} />
                   </div>
                   <div>
-                    <span style={{ fontSize: '0.65rem', textTransform: 'uppercase', color: 'var(--color-text-muted)', letterSpacing: '0.1em', display: 'block' }}>Email Support</span>
-                    <a href="mailto:concierge@vantelle.com" style={{ fontSize: '1rem', color: 'var(--color-text-dark)', fontWeight: '500' }}>concierge@vantelle.com</a>
+                    <span style={{ fontSize: '0.65rem', textTransform: 'uppercase', color: 'var(--color-text-muted)', letterSpacing: '0.12em', display: 'block', marginBottom: '0.2rem' }}>
+                      Corporate & Concierge Email
+                    </span>
+                    <a href={`mailto:${siteConfig.corporateEmail}`} style={{ fontSize: '1rem', color: 'var(--color-text-dark)', fontWeight: '500' }}>
+                      {siteConfig.corporateEmail}
+                    </a>
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'center' }}>
+                {/* International Phone Contacts (India & Italy) */}
+                <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'flex-start' }}>
                   <div style={{ padding: '0.75rem', backgroundColor: 'var(--color-bg-warm)', borderRadius: '50%', color: 'var(--color-accent-gold)', display: 'flex' }}>
                     <Phone size={18} />
                   </div>
                   <div>
-                    <span style={{ fontSize: '0.65rem', textTransform: 'uppercase', color: 'var(--color-text-muted)', letterSpacing: '0.1em', display: 'block' }}>Phone Contact</span>
-                    <a href="tel:+442079460958" style={{ fontSize: '1rem', color: 'var(--color-text-dark)', fontWeight: '500' }}>+44 207 946 0958</a>
+                    <span style={{ fontSize: '0.65rem', textTransform: 'uppercase', color: 'var(--color-text-muted)', letterSpacing: '0.12em', display: 'block', marginBottom: '0.2rem' }}>
+                      Telephone Contacts
+                    </span>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                      <div>
+                        <span style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', marginRight: '0.5rem' }}>India:</span>
+                        <a href={`tel:${siteConfig.phones.india}`} style={{ fontSize: '0.95rem', color: 'var(--color-text-dark)', fontWeight: '500' }}>
+                          {siteConfig.phones.india}
+                        </a>
+                      </div>
+                      <div>
+                        <span style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', marginRight: '0.5rem' }}>Italy:</span>
+                        <a href={`tel:${siteConfig.phones.italy}`} style={{ fontSize: '0.95rem', color: 'var(--color-text-dark)', fontWeight: '500' }}>
+                          {siteConfig.phones.italy}
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'center' }}>
+                {/* Digital Presence */}
+                <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'flex-start' }}>
                   <div style={{ padding: '0.75rem', backgroundColor: 'var(--color-bg-warm)', borderRadius: '50%', color: 'var(--color-accent-gold)', display: 'flex' }}>
-                    <MapPin size={18} />
+                    <Globe size={18} />
                   </div>
                   <div>
-                    <span style={{ fontSize: '0.65rem', textTransform: 'uppercase', color: 'var(--color-text-muted)', letterSpacing: '0.1em', display: 'block' }}>Milano Studio Office</span>
-                    <span style={{ fontSize: '1rem', color: 'var(--color-text-dark)', fontWeight: '500' }}>Corso Venezia, 12, Milano, Italy</span>
+                    <span style={{ fontSize: '0.65rem', textTransform: 'uppercase', color: 'var(--color-text-muted)', letterSpacing: '0.12em', display: 'block', marginBottom: '0.2rem' }}>
+                      Official Domain
+                    </span>
+                    <span style={{ fontSize: '1rem', color: 'var(--color-text-dark)', fontWeight: '500' }}>
+                      {siteConfig.website}
+                    </span>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--color-accent-gold)', marginLeft: '0.5rem' }}>
+                      {siteConfig.websiteStatus}
+                    </span>
                   </div>
                 </div>
-              </div>
 
-              {/* Social Channels */}
-              <div>
-                <span className="editorial-subtitle" style={{ marginBottom: '1rem' }}>Social Networks</span>
-                <div style={{ display: 'flex', gap: '1.5rem', fontSize: '0.85rem', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-                  <a href="#instagram" style={{ borderBottom: '1px solid transparent', paddingBottom: '0.2rem' }} className="social-link">Instagram</a>
-                  <a href="#pinterest" style={{ borderBottom: '1px solid transparent', paddingBottom: '0.2rem' }} className="social-link">Pinterest</a>
-                  <a href="#journal" style={{ borderBottom: '1px solid transparent', paddingBottom: '0.2rem' }} className="social-link">Journal</a>
-                </div>
               </div>
             </div>
 
-            {/* Right Contact Form */}
+            {/* Right Simple & Elegant Enquiry Form (Document Section 6) */}
             <div 
               style={{
                 borderRadius: '8px',
@@ -108,28 +150,35 @@ export default function Contact() {
               {submitted ? (
                 <div style={{ textAlign: 'center', padding: '3rem 0', animation: 'fadeIn 0.5s ease' }}>
                   <div style={{ 
-                    width: '50px', 
-                    height: '50px', 
+                    width: '56px', 
+                    height: '56px', 
                     borderRadius: '50%', 
-                    backgroundColor: 'rgba(197, 168, 128, 0.1)', 
+                    backgroundColor: 'rgba(197, 168, 128, 0.12)', 
                     display: 'flex', 
                     alignItems: 'center', 
-                    justifyContent: 'center',
+                    justifyContent: 'center', 
                     margin: '0 auto 1.5rem auto',
                     color: 'var(--color-accent-gold)'
                   }}>
-                    <Check size={24} />
+                    <Check size={28} />
                   </div>
-                  <h3 style={{ fontSize: '1.6rem', marginBottom: '0.5rem' }}>Message Transmitted</h3>
-                  <p style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)' }}>
-                    Thank you. A VanTelle styling partner will contact you shortly.
+                  <h3 style={{ fontSize: '1.8rem', marginBottom: '0.5rem', fontFamily: 'var(--font-serif)' }}>
+                    Inquiry Received
+                  </h3>
+                  <p style={{ fontSize: '0.95rem', color: 'var(--color-text-muted)', lineHeight: '1.6' }}>
+                    Thank you for reaching out. A VanTelle representative will respond to your inquiry shortly.
                   </p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit}>
-                  <h3 style={{ fontSize: '1.8rem', marginBottom: '2.5rem', fontFamily: 'var(--font-serif)' }}>
-                    Send a Message
-                  </h3>
+                  <div style={{ marginBottom: '2.5rem' }}>
+                    <span className="editorial-subtitle" style={{ color: 'var(--color-accent-gold)', marginBottom: '0.5rem' }}>
+                      Private Correspondence
+                    </span>
+                    <h3 style={{ fontSize: '2rem', fontFamily: 'var(--font-serif)', fontWeight: '400' }}>
+                      Send an Enquiry
+                    </h3>
+                  </div>
 
                   <div className="luxury-input-group">
                     <input 
@@ -180,16 +229,16 @@ export default function Contact() {
                       className="luxury-input"
                       style={{ resize: 'none' }}
                     />
-                    <label className="luxury-label">YOUR INQUIRY MESSAGE</label>
+                    <label className="luxury-label">YOUR MESSAGE / PRODUCT OF INTEREST</label>
                   </div>
 
                   <button 
                     type="submit" 
                     className="btn-primary" 
-                    style={{ width: '100%', padding: '1.1rem', display: 'flex', gap: '0.5rem', alignItems: 'center', justifyContent: 'center' }}
+                    style={{ width: '100%', padding: '1.15rem', display: 'flex', gap: '0.6rem', alignItems: 'center', justifyContent: 'center' }}
                   >
-                    <span>Send Message</span>
-                    <Send size={14} />
+                    <span>Submit Enquiry</span>
+                    <Send size={15} />
                   </button>
                 </form>
               )}
@@ -200,17 +249,13 @@ export default function Contact() {
       </section>
 
       <style>{`
-        .social-link:hover {
-          color: var(--color-accent-gold) !important;
-          border-bottom-color: var(--color-accent-gold) !important;
-        }
         @media (max-width: 900px) {
           .contact-split {
             grid-template-columns: 1fr !important;
             gap: 4rem !important;
           }
           .contact-form-panel {
-            padding: 2rem 1.5rem !important;
+            padding: 2.5rem 1.5rem !important;
           }
         }
       `}</style>

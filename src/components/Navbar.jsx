@@ -51,18 +51,32 @@ export default function Navbar({ activePage, setActivePage }) {
         color: activePage === 'vip' ? 'var(--color-text-light)' : 'var(--color-text-dark)'
       }}
     >
-      {/* Brand Logo */}
+      {/* Brand Logo & Monogram */}
       <div 
         onClick={() => handleNavClick('home')}
         style={{
-          fontFamily: 'var(--font-serif)',
-          fontSize: '1.65rem',
-          letterSpacing: '0.12em',
-          cursor: 'pointer',
-          fontWeight: '300'
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.75rem',
+          cursor: 'pointer'
         }}
       >
-        VanTelle
+        <svg viewBox="0 0 64 64" width="30" height="30" style={{ display: 'block', flexShrink: 0 }}>
+          <rect width="64" height="64" rx="14" fill="#141414" />
+          <path d="M 16 20 C 22 20, 26 25, 29 36 C 31 43, 33 48, 36 48 C 39 48, 43 41, 47 28 C 49 23, 50 20, 52 20" stroke="#97ABFF" strokeWidth="3.5" strokeLinecap="round" fill="none" />
+          <path d="M 23 27 C 32 23, 41 21, 50 21" stroke="#C5A880" strokeWidth="3" strokeLinecap="round" fill="none" />
+          <path d="M 36 21 L 27 49" stroke="#F7F5F2" strokeWidth="3.5" strokeLinecap="round" fill="none" />
+        </svg>
+        <span 
+          style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: '1.45rem',
+            letterSpacing: '0.06em',
+            fontWeight: '500'
+          }}
+        >
+          VanTelle
+        </span>
       </div>
 
       {/* Navigation Links */}

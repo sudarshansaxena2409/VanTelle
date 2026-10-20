@@ -1,38 +1,40 @@
 import React, { useState } from 'react';
-import { ArrowRight, Sparkles, ChevronRight, Award, Compass, RefreshCw } from 'lucide-react';
+import { ArrowRight, Sparkles, ChevronRight, Award, Compass, RefreshCw, Feather } from 'lucide-react';
+import { siteConfig } from '../config/siteConfig';
 
 export default function Home({ setActivePage }) {
   // States for interactive AI personalisation concept
   const [quizStep, setQuizStep] = useState(0);
-  const [answers, setAnswers] = useState({ style: '', fabric: '', vibe: '' });
+  const [answers, setAnswers] = useState({ style: '', aesthetic: '', expression: '' });
   const [personalStyleCode, setPersonalStyleCode] = useState(null);
 
+  // Exact 3 AI Personalisation Questions from Document Section 2
   const quizOptions = [
     {
-      question: "Which silhouette best defines your personal style?",
+      question: "How would you describe your personal style?",
       key: "style",
       options: [
-        { label: "Relaxed & Structured", desc: "Minimalist tailoring, organic textures" },
-        { label: "Sculptural & Bold", desc: "Strong lines, artistic geometries" },
-        { label: "Fluid & Sensual", desc: "Draped fabrics, subtle movement" }
+        { label: "Minimal & Architectural", desc: "Clean lines, understated tailoring, and sculptural silhouettes." },
+        { label: "Timeless & Refined", desc: "Classic proportions, tactile luxury, and effortless elegance." },
+        { label: "Organic & Contemporary", desc: "Fluid draping, natural imperfections, and relaxed ease." }
       ]
     },
     {
-      question: "Select your preferred texture profile:",
-      key: "fabric",
+      question: "Which colours, textures, or aesthetics do you naturally gravitate towards?",
+      key: "aesthetic",
       options: [
-        { label: "Raw Linen & Cashmere", desc: "Tactile, breathable luxury" },
-        { label: "Fluid Silk & Satin", desc: "Lustrous, elegant draping" },
-        { label: "Heavy Wool & Soft Leather", desc: "Structured, grounded luxury" }
+        { label: "Warm Neutrals & Tactile Fibres", desc: "Cashmere, raw Belgian flax, sand tones, and unbleached silk." },
+        { label: "Charcoal, Deep Obsidian & Pure Gold", desc: "Moody mineral tones, satin silk, and warm 18k gold accents." },
+        { label: "Earthy Minerals & Raw Stoneware", desc: "Tuscan travertine, porous terracotta, and hand-thrown clay." }
       ]
     },
     {
-      question: "What is your primary design philosophy?",
-      key: "vibe",
+      question: "What would you like your style to express about you?",
+      key: "expression",
       options: [
-        { label: "The Art of Quiet Luxury", desc: "Unseen details, understatement" },
-        { label: "Artisan Heritage & Narrative", desc: "Visible craft, heritage story" },
-        { label: "Contemporary Intelligent Tech", desc: "Futuristic lines, bespoke sizing" }
+        { label: "Quiet Confidence & Discernment", desc: "Elegance that whispers, valued for intimacy over ostentation." },
+        { label: "Authentic Craft & Heritage", desc: "A profound respect for generational artisan craftsmanship." },
+        { label: "Uncompromising Individuality", desc: "A personal signature shaped by curated, meaningful objects." }
       ]
     }
   ];
@@ -43,34 +45,49 @@ export default function Home({ setActivePage }) {
     if (quizStep < quizOptions.length - 1) {
       setQuizStep(quizStep + 1);
     } else {
-      // Calculate personal luxury token
+      // Generate unique bespoke personal profile token
       const codes = {
         style: updatedAnswers.style.slice(0, 2).toUpperCase(),
-        fabric: updatedAnswers.fabric.slice(0, 2).toUpperCase(),
-        vibe: updatedAnswers.vibe.slice(0, 2).toUpperCase()
+        aesthetic: updatedAnswers.aesthetic.slice(0, 2).toUpperCase(),
+        expression: updatedAnswers.expression.slice(0, 2).toUpperCase()
       };
-      setPersonalStyleCode(`VT-${codes.style}${codes.fabric}${codes.vibe}-${Math.floor(100 + Math.random() * 900)}`);
+      setPersonalStyleCode(`VT-${codes.style}${codes.aesthetic}${codes.expression}-${Math.floor(100 + Math.random() * 900)}`);
       setQuizStep(3); // Result step
     }
   };
 
   const resetQuiz = () => {
     setQuizStep(0);
-    setAnswers({ style: '', fabric: '', vibe: '' });
+    setAnswers({ style: '', aesthetic: '', expression: '' });
     setPersonalStyleCode(null);
   };
 
+  // Three Main Product Categories per Document Section 3
   const collections = [
-    { id: 'fashion', label: 'Fashion', desc: 'Sartorial ease & refined silhouettes', img: import.meta.env.BASE_URL + 'assets/vantelle_hero.png' },
-    { id: 'jewellery', label: 'Jewellery', desc: 'Sculptured items & pure gold craftsmanship', img: import.meta.env.BASE_URL + 'assets/collection_jewellery.png' },
-    { id: 'homedecor', label: 'Home Décor', desc: 'Natural textures & artisan ceramics', img: import.meta.env.BASE_URL + 'assets/hovofaber_collab.png' },
-    { id: 'lifestyle', label: 'Lifestyle', desc: 'Curated leather details & travel elements', img: import.meta.env.BASE_URL + 'assets/vip_background.png' }
+    { 
+      id: 'jewellery', 
+      label: 'Jewellery', 
+      desc: 'Sculptural 18k gold forms, organic pearls & ethically mined stones', 
+      img: import.meta.env.BASE_URL + 'assets/collection_jewellery.png' 
+    },
+    { 
+      id: 'fashion', 
+      label: 'Fashion', 
+      desc: 'Italian linen, liquid mulberry silk & generational cashmere tailoring', 
+      img: import.meta.env.BASE_URL + 'assets/vantelle_hero.png' 
+    },
+    { 
+      id: 'homedecor', 
+      label: 'Home Décor', 
+      desc: 'Tuscan travertine, hand-thrown ceramics & tactile Belgian flax', 
+      img: import.meta.env.BASE_URL + 'assets/hovofaber_collab.png' 
+    }
   ];
 
   return (
     <div className="fade-in" style={{ paddingBottom: '0' }}>
       
-      {/* LUXURY HERO SECTION */}
+      {/* 1. LUXURY HERO SECTION (Document Section 2) */}
       <section 
         style={{
           position: 'relative',
@@ -82,11 +99,11 @@ export default function Home({ setActivePage }) {
           backgroundColor: '#EDE7DF'
         }}
       >
-        {/* Background image with visual overlay */}
+        {/* Background Editorial Visual with Subtle Cinematic Overlay */}
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}>
           <img 
             src={import.meta.env.BASE_URL + "assets/vantelle_hero.png"} 
-            alt="VanTelle Home Editorial" 
+            alt="VanTelle Editorial Luxury" 
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
           <div 
@@ -96,44 +113,43 @@ export default function Home({ setActivePage }) {
               left: 0, 
               width: '100%', 
               height: '100%', 
-              background: 'linear-gradient(to right, rgba(247, 245, 242, 0.9) 35%, rgba(247, 245, 242, 0.2) 70%, transparent 100%)' 
+              background: 'linear-gradient(to right, rgba(247, 245, 242, 0.92) 38%, rgba(247, 245, 242, 0.35) 75%, transparent 100%)' 
             }} 
           />
         </div>
 
-        {/* Hero Content */}
+        {/* Hero Content per Document Exact Copy */}
         <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
-          <div style={{ maxWidth: '620px' }} className="fade-in-up">
-            <span className="editorial-subtitle">Emotion & Intelligence</span>
+          <div style={{ maxWidth: '640px' }} className="fade-in-up">
+            <span className="editorial-subtitle">Editorial Portfolio</span>
             <h1 
               className="editorial-title" 
               style={{ 
                 fontFamily: 'var(--font-serif)', 
-                fontSize: '4.5rem', 
-                lineHeight: '1.05', 
-                marginBottom: '2rem',
-                color: 'var(--color-text-dark)'
+                fontSize: '4.2rem', 
+                lineHeight: '1.08', 
+                marginBottom: '1.75rem',
+                color: 'var(--color-text-dark)',
+                letterSpacing: '-0.02em'
               }}
             >
-              Redefining Luxury<br />
-              Through Personal<br />
-              Intelligence.
+              VanTelle — A Reflection of Individuality.
             </h1>
-            <p style={{ fontSize: '1.1rem', marginBottom: '3rem', fontWeight: '300', color: 'var(--color-text-muted)', lineHeight: '1.8' }}>
-              VanTelle blends modern technology with raw, timeless craftsmanship. We craft personalized lifestyle experiences that resonate emotionally and endure beautifully.
+            <p style={{ fontSize: '1.1rem', marginBottom: '2.5rem', fontWeight: '300', color: 'var(--color-text-muted)', lineHeight: '1.8' }}>
+              An exploration of personal expression through thoughtfully curated fashion, jewellery, and home décor. Where craftsmanship, creativity, and individuality come together.
             </p>
-            <div style={{ display: 'flex', gap: '1.5rem' }}>
+            <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
               <button 
                 onClick={() => setActivePage('collections')} 
                 className="btn-primary"
               >
-                Explore Collections
+                Explore Curated Collections
               </button>
               <button 
                 onClick={() => setActivePage('about')} 
                 className="btn-secondary"
               >
-                Our Story
+                Our Brand Story
               </button>
             </div>
           </div>
@@ -159,45 +175,45 @@ export default function Home({ setActivePage }) {
         </div>
       </section>
 
-      {/* BRAND STATEMENT */}
+      {/* 2. BRAND STATEMENT (Document Section 2) */}
       <section className="section-padding" style={{ backgroundColor: 'var(--color-bg-warm)' }}>
         <div className="container">
-          <div style={{ maxWidth: '850px', margin: '0 auto', textAlign: 'center' }}>
-            <span className="editorial-subtitle">The Philosophy</span>
+          <div style={{ maxWidth: '880px', margin: '0 auto', textAlign: 'center' }}>
+            <span className="editorial-subtitle">Brand Statement</span>
             <h2 
               style={{ 
                 fontFamily: 'var(--font-serif)', 
-                fontSize: '2.8rem', 
+                fontSize: '2.9rem', 
                 fontWeight: '300', 
-                lineHeight: '1.4', 
-                marginBottom: '2.5rem',
+                lineHeight: '1.35', 
+                marginBottom: '2rem',
                 color: 'var(--color-text-dark)'
               }}
             >
-              "We believe modern luxury is not defined by excess, but by alignment. Connecting the quiet beauty of handcrafted artifacts with the intelligent precision of modern tailoring."
+              "Luxury is not simply what we own, but how we choose to express ourselves."
             </h2>
-            <div style={{ width: '60px', height: '1px', backgroundColor: 'var(--color-accent-gold)', margin: '0 auto 2.5rem auto' }} />
-            <p style={{ fontSize: '1rem', color: 'var(--color-text-muted)', lineHeight: '1.8', maxWidth: '600px', margin: '0 auto' }}>
-              Every item in our ecosystem is born from raw materials, nurtured by authentic human creators, and matched specifically to you using proprietary styling criteria.
+            <div style={{ width: '60px', height: '1px', backgroundColor: 'var(--color-accent-gold)', margin: '0 auto 2rem auto' }} />
+            <p style={{ fontSize: '1.05rem', color: 'var(--color-text-muted)', lineHeight: '1.8', maxWidth: '640px', margin: '0 auto' }}>
+              VanTelle was born from the desire to create a thoughtful sanctuary where craftsmanship, timeless aesthetics, and individual personality converge without excess.
             </p>
           </div>
         </div>
       </section>
 
-      {/* FEATURED COLLECTIONS */}
+      {/* 3. FEATURED COLLECTIONS: 3 MAIN CATEGORIES (Document Section 3) */}
       <section className="section-padding" style={{ backgroundColor: 'var(--color-bg-light)' }}>
         <div className="container">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '4rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '4rem', flexWrap: 'wrap', gap: '1rem' }}>
             <div>
-              <span className="editorial-subtitle">Curated Portfolios</span>
-              <h2 style={{ fontSize: '2.5rem', fontWeight: '300' }}>Featured Collections</h2>
+              <span className="editorial-subtitle">Curated Categories</span>
+              <h2 style={{ fontSize: '2.6rem', fontWeight: '300' }}>The Three Portfolios</h2>
             </div>
             <button onClick={() => setActivePage('collections')} className="btn-accent">
               View All Portfolios <ArrowRight size={14} style={{ marginLeft: '0.5rem' }} />
             </button>
           </div>
 
-          <div className="grid-4">
+          <div className="grid-3">
             {collections.map((col, index) => (
               <div 
                 key={col.id} 
@@ -205,14 +221,14 @@ export default function Home({ setActivePage }) {
                 onClick={() => setActivePage('collections')}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="luxury-card-img-wrapper">
+                <div className="luxury-card-img-wrapper" style={{ aspectRatio: '3/4' }}>
                   <img src={col.img} alt={col.label} className="luxury-card-img" />
                   <div className="luxury-card-overlay" />
                 </div>
-                <div className="luxury-card-content">
-                  <span className="luxury-card-subtitle">Collection</span>
-                  <h3 className="luxury-card-title">{col.label}</h3>
-                  <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginTop: '0.25rem' }}>{col.desc}</p>
+                <div className="luxury-card-content" style={{ padding: '1.5rem 0' }}>
+                  <span className="luxury-card-subtitle">Category</span>
+                  <h3 className="luxury-card-title" style={{ fontSize: '1.75rem', marginTop: '0.25rem' }}>{col.label}</h3>
+                  <p style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)', marginTop: '0.5rem', lineHeight: '1.6' }}>{col.desc}</p>
                 </div>
               </div>
             ))}
@@ -220,70 +236,71 @@ export default function Home({ setActivePage }) {
         </div>
       </section>
 
-      {/* AI & PERSONALISATION CONCEPT */}
+      {/* 4. AI PERSONALISATION PORTAL (Document Section 2 & Page 2 Quiz) */}
       <section className="section-padding" style={{ backgroundColor: 'var(--color-bg-warm)' }}>
         <div className="container">
-          <div className="grid-2" style={{ alignItems: 'center' }}>
+          <div className="grid-2" style={{ alignItems: 'center', gap: '5rem' }}>
             
             {/* Left Narrative */}
             <div>
-              <span className="editorial-subtitle">Intelligent Curation</span>
-              <h2 style={{ fontSize: '2.5rem', fontWeight: '300', marginBottom: '2rem' }}>
-                AI + Human Tailoring
+              <span className="editorial-subtitle">Intelligent Personalisation</span>
+              <h2 style={{ fontSize: '2.6rem', fontWeight: '300', marginBottom: '1.75rem' }}>
+                AI Personalisation Portal
               </h2>
-              <p style={{ marginBottom: '2rem', lineHeight: '1.8' }}>
-                VanTelle combines cutting-edge machine learning preferences with master artisans. By learning your preferences, silhouette dimensions, and tactile choices, our ecosystem recommends or drafts custom pieces that align with your lifestyle.
+              <p style={{ marginBottom: '1.75rem', lineHeight: '1.8', fontSize: '1.05rem' }}>
+                At VanTelle, personal expression is our compass. Our interactive curation portal engages with your intuitive style, textural sensibilities, and personal narrative to formulate a bespoke aesthetic profile.
               </p>
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
-                  <div style={{ padding: '0.75rem', backgroundColor: 'rgba(26, 26, 26, 0.03)', borderRadius: '50%', color: 'var(--color-accent-gold)' }}>
+                  <div style={{ padding: '0.75rem', backgroundColor: 'rgba(26, 26, 26, 0.04)', borderRadius: '50%', color: 'var(--color-accent-gold)' }}>
                     <Sparkles size={20} />
                   </div>
                   <div>
-                    <h4 style={{ fontSize: '1.1rem', fontFamily: 'var(--font-sans)', fontWeight: '500', marginBottom: '0.25rem', color: 'var(--color-text-dark)' }}>Bespoke Fit Recommendations</h4>
-                    <p style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)' }}>Algorithms optimize fabric, drape, and length based on your structural archetype.</p>
+                    <h4 style={{ fontSize: '1.1rem', fontFamily: 'var(--font-sans)', fontWeight: '500', marginBottom: '0.25rem', color: 'var(--color-text-dark)' }}>Individuality Over Trends</h4>
+                    <p style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)' }}>Tailored aesthetic curation crafted around who you are, rather than fast seasons or mass algorithms.</p>
                   </div>
                 </div>
 
                 <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
-                  <div style={{ padding: '0.75rem', backgroundColor: 'rgba(26, 26, 26, 0.03)', borderRadius: '50%', color: 'var(--color-accent-gold)' }}>
+                  <div style={{ padding: '0.75rem', backgroundColor: 'rgba(26, 26, 26, 0.04)', borderRadius: '50%', color: 'var(--color-accent-gold)' }}>
                     <Compass size={20} />
                   </div>
                   <div>
-                    <h4 style={{ fontSize: '1.1rem', fontFamily: 'var(--font-sans)', fontWeight: '500', marginBottom: '0.25rem', color: 'var(--color-text-dark)' }}>Artisan Integration</h4>
-                    <p style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)' }}>Bespoke tailoring files are compiled automatically and dispatched directly to local master tailors.</p>
+                    <h4 style={{ fontSize: '1.1rem', fontFamily: 'var(--font-sans)', fontWeight: '500', marginBottom: '0.25rem', color: 'var(--color-text-dark)' }}>Artisan Alignment</h4>
+                    <p style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)' }}>Match directly with generational Italian workshops, master silversmiths, and local ceramic ateliers.</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Right Interactive Mockup Container */}
+            {/* Right Interactive Experience (Page 2 Questions) */}
             <div 
               style={{
                 borderRadius: '8px',
                 padding: '3rem',
                 boxShadow: '0 20px 40px rgba(0,0,0,0.03)',
                 position: 'relative',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                backgroundColor: 'var(--color-bg-light)',
+                border: '1px solid var(--color-bg-greige)'
               }}
-              className="glass-panel"
             >
               {/* Header */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', borderBottom: '1px solid rgba(26,26,26,0.05)', paddingBottom: '1rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', borderBottom: '1px solid rgba(26,26,26,0.06)', paddingBottom: '1rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <Sparkles size={16} style={{ color: 'var(--color-accent-gold)' }} />
-                  <span style={{ fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: '500' }}>Personalisation Portal</span>
+                  <span style={{ fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: '500' }}>Personalisation Quiz</span>
                 </div>
                 <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
-                  {quizStep < 3 ? `Step ${quizStep + 1} of 3` : 'Curation Ready'}
+                  {quizStep < 3 ? `Question ${quizStep + 1} of 3` : 'Profile Ready'}
                 </span>
               </div>
 
               {/* Quiz Body */}
               {quizStep < 3 ? (
                 <div>
-                  <h3 style={{ fontSize: '1.6rem', marginBottom: '2rem', height: '70px', lineHeight: '1.3' }}>
+                  <h3 style={{ fontSize: '1.5rem', marginBottom: '1.75rem', minHeight: '60px', lineHeight: '1.3' }}>
                     {quizOptions[quizStep].question}
                   </h3>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -303,14 +320,14 @@ export default function Home({ setActivePage }) {
                         }}
                         className="quiz-option-btn"
                       >
-                        <div style={{ fontWeight: '500', fontSize: '0.9rem', marginBottom: '0.25rem', color: 'var(--color-text-dark)' }}>{opt.label}</div>
-                        <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>{opt.desc}</div>
+                        <div style={{ fontWeight: '500', fontSize: '0.95rem', marginBottom: '0.25rem', color: 'var(--color-text-dark)' }}>{opt.label}</div>
+                        <div style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>{opt.desc}</div>
                       </button>
                     ))}
                   </div>
                 </div>
               ) : (
-                /* Curation output */
+                /* Curation Token & Profile Summary */
                 <div style={{ textAlign: 'center', padding: '1rem 0' }}>
                   <div style={{ 
                     width: '60px', 
@@ -325,7 +342,7 @@ export default function Home({ setActivePage }) {
                   }}>
                     <Award size={28} />
                   </div>
-                  <h3 style={{ fontSize: '1.8rem', marginBottom: '0.5rem' }}>Personal Profile Compiled</h3>
+                  <h3 style={{ fontSize: '1.8rem', marginBottom: '0.5rem' }}>Individuality Profile Compiled</h3>
                   <span style={{ 
                     fontSize: '0.75rem', 
                     letterSpacing: '0.15em', 
@@ -335,7 +352,7 @@ export default function Home({ setActivePage }) {
                     display: 'block',
                     marginBottom: '2rem'
                   }}>
-                    Bespoke Token: {personalStyleCode}
+                    Personal Token: {personalStyleCode}
                   </span>
                   
                   <div 
@@ -348,19 +365,19 @@ export default function Home({ setActivePage }) {
                       marginBottom: '2rem'
                     }}
                   >
-                    <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-text-muted)', marginBottom: '0.5rem' }}>Your Custom Profile:</div>
-                    <div style={{ fontSize: '0.85rem', marginBottom: '0.25rem' }}>• <strong>Archetype:</strong> {answers.style}</div>
-                    <div style={{ fontSize: '0.85rem', marginBottom: '0.25rem' }}>• <strong>Material Preference:</strong> {answers.fabric}</div>
-                    <div style={{ fontSize: '0.85rem' }}>• <strong>Luxury Philosophy:</strong> {answers.vibe}</div>
+                    <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-text-muted)', marginBottom: '0.5rem' }}>Your Aesthetic Blueprint:</div>
+                    <div style={{ fontSize: '0.85rem', marginBottom: '0.35rem' }}>• <strong>Style Archetype:</strong> {answers.style}</div>
+                    <div style={{ fontSize: '0.85rem', marginBottom: '0.35rem' }}>• <strong>Texture & Aesthetic:</strong> {answers.aesthetic}</div>
+                    <div style={{ fontSize: '0.85rem' }}>• <strong>Self Expression:</strong> {answers.expression}</div>
                   </div>
 
                   <div style={{ display: 'flex', gap: '1rem' }}>
                     <button 
-                      onClick={() => setActivePage('vip')} 
+                      onClick={() => setActivePage('collections')} 
                       className="btn-primary" 
                       style={{ flex: 1, padding: '0.75rem' }}
                     >
-                      Access VIP Room
+                      Explore Matching Pieces
                     </button>
                     <button 
                       onClick={resetQuiz} 
@@ -373,7 +390,7 @@ export default function Home({ setActivePage }) {
                         justifyContent: 'center',
                         cursor: 'pointer' 
                       }}
-                      title="Reset Quiz"
+                      title="Retake Quiz"
                     >
                       <RefreshCw size={16} />
                     </button>
@@ -394,22 +411,21 @@ export default function Home({ setActivePage }) {
         `}</style>
       </section>
 
-      {/* STRATEGIC COLLABORATION: HOVO FABER TEASER */}
+      {/* 5. STRATEGIC COLLABORATION: HOVO FABER (Document Section 5, 6 & Page 9-11) */}
       <section className="section-padding dark-section" style={{ position: 'relative', overflow: 'hidden' }}>
-        {/* Background visual cover */}
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', opacity: 0.15, zIndex: 1 }}>
           <img src={import.meta.env.BASE_URL + "assets/hovofaber_collab.png"} alt="Craft Detail" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
         
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <div style={{ maxWidth: '650px' }}>
-            <span className="editorial-subtitle">Strategic Collaboration</span>
+          <div style={{ maxWidth: '680px' }}>
+            <span className="editorial-subtitle" style={{ color: 'var(--color-accent-gold)' }}>Strategic Collaborations</span>
             <h2 
               style={{ 
                 fontFamily: 'var(--font-serif)', 
-                fontSize: '3.2rem', 
+                fontSize: '3.4rem', 
                 fontWeight: '300', 
-                marginBottom: '1.5rem',
+                marginBottom: '1.25rem',
                 lineHeight: '1.15'
               }}
             >
@@ -427,20 +443,20 @@ export default function Home({ setActivePage }) {
             >
               "Celebrating craftsmanship, culture, storytelling, and meaningful luxury experiences."
             </h3>
-            <p style={{ marginBottom: '3rem', fontSize: '1.05rem', lineHeight: '1.8' }}>
-              We've partnered with creative director and creative studio Hovo Faber to curate unique artisan networks, develop exclusive lifestyle collections, and craft digital luxury stories that transcend time.
+            <p style={{ marginBottom: '2.5rem', fontSize: '1.05rem', lineHeight: '1.8', color: '#D9D4CD' }}>
+              We partner with cultural curators and creative studios to expand our ecosystem beyond conventional retail. Through deep artisan networks and collaborative storytelling, our partnerships honor heritage while redefining contemporary luxury.
             </p>
             <button 
               onClick={() => setActivePage('collaborations')} 
               className="btn-primary"
             >
-              Explore Creative Partnership
+              Discover the Collaboration
             </button>
           </div>
         </div>
       </section>
 
-      {/* VIP MEMBERSHIP CTA */}
+      {/* 6. VIP MEMBERSHIP CTA */}
       <section className="section-padding" style={{ backgroundColor: 'var(--color-bg-light)' }}>
         <div className="container">
           <div 
@@ -456,13 +472,13 @@ export default function Home({ setActivePage }) {
             }}
             className="vip-cta-banner"
           >
-            <div style={{ maxWidth: '550px' }}>
-              <span className="editorial-subtitle">VIP Services</span>
+            <div style={{ maxWidth: '580px' }}>
+              <span className="editorial-subtitle">Private Salon</span>
               <h2 style={{ fontSize: '2.5rem', fontWeight: '300', marginBottom: '1rem', color: 'var(--color-text-dark)' }}>
                 The VanTelle Membership
               </h2>
-              <p style={{ color: 'var(--color-text-muted)', fontSize: '1rem', lineHeight: '1.7' }}>
-                Gain priority reservation rights to upcoming artisan collaborations, private tailoring bookings in Milan & London, and curated lifestyle experiences.
+              <p style={{ color: 'var(--color-text-muted)', fontSize: '1rem', lineHeight: '1.8' }}>
+                Gain early access to limited artisan drops, private viewing salons, and direct concierge styling tailored to your personal aesthetic token.
               </p>
             </div>
             
@@ -477,16 +493,16 @@ export default function Home({ setActivePage }) {
         </div>
       </section>
 
-      {/* STORYTELLING / JOURNAL PREVIEW */}
+      {/* 7. JOURNAL & STORIES PREVIEW (Document Section 5) */}
       <section className="section-padding" style={{ backgroundColor: 'var(--color-bg-light)', borderTop: '1px solid rgba(26,26,26,0.05)' }}>
         <div className="container">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '4rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '4rem', flexWrap: 'wrap', gap: '1rem' }}>
             <div>
               <span className="editorial-subtitle">The Journal</span>
-              <h2 style={{ fontSize: '2.5rem', fontWeight: '300' }}>Stories & Inspiration</h2>
+              <h2 style={{ fontSize: '2.6rem', fontWeight: '300' }}>Stories & Artisan Narratives</h2>
             </div>
             <button onClick={() => setActivePage('stories')} className="btn-accent">
-              View the Journal <ArrowRight size={14} style={{ marginLeft: '0.5rem' }} />
+              View All Stories <ArrowRight size={14} style={{ marginLeft: '0.5rem' }} />
             </button>
           </div>
 
@@ -494,36 +510,36 @@ export default function Home({ setActivePage }) {
             {/* Story Card 1 */}
             <div className="luxury-card" onClick={() => setActivePage('stories')}>
               <div className="luxury-card-img-wrapper" style={{ aspectRatio: '16/10' }}>
-                <img src={import.meta.env.BASE_URL + "assets/hovofaber_collab.png"} alt="Artisan hands" className="luxury-card-img" />
+                <img src={import.meta.env.BASE_URL + "assets/hovofaber_collab.png"} alt="Artisan hands weaving" className="luxury-card-img" />
               </div>
-              <div className="luxury-card-content">
+              <div className="luxury-card-content" style={{ padding: '1.5rem 0' }}>
                 <span className="luxury-card-subtitle">Heritage</span>
                 <h3 className="luxury-card-title" style={{ fontSize: '1.4rem' }}>The Art of Quiet Luxury</h3>
-                <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginTop: '0.5rem' }}>An interview with Italian master embroiderers on preserving centuries-old techniques in a digitized world.</p>
+                <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginTop: '0.5rem' }}>Preserving raw hand-weaving techniques in the Lombardy hills with generational master weavers.</p>
               </div>
             </div>
 
             {/* Story Card 2 */}
             <div className="luxury-card" onClick={() => setActivePage('stories')}>
               <div className="luxury-card-img-wrapper" style={{ aspectRatio: '16/10' }}>
-                <img src={import.meta.env.BASE_URL + "assets/vip_background.png"} alt="Luxury interior" className="luxury-card-img" />
+                <img src={import.meta.env.BASE_URL + "assets/vip_background.png"} alt="Minimal architecture interior" className="luxury-card-img" />
               </div>
-              <div className="luxury-card-content">
+              <div className="luxury-card-content" style={{ padding: '1.5rem 0' }}>
                 <span className="luxury-card-subtitle">Architecture</span>
                 <h3 className="luxury-card-title" style={{ fontSize: '1.4rem' }}>A Sense of Place</h3>
-                <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginTop: '0.5rem' }}>Exploring the visual dialogues between Brutalist architecture and organic interior materials.</p>
+                <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginTop: '0.5rem' }}>Exploring visual dialogues between architectural geometry and the tactile textures of modern clothing.</p>
               </div>
             </div>
 
             {/* Story Card 3 */}
             <div className="luxury-card" onClick={() => setActivePage('stories')}>
               <div className="luxury-card-img-wrapper" style={{ aspectRatio: '16/10' }}>
-                <img src={import.meta.env.BASE_URL + "assets/collection_jewellery.png"} alt="Jewellery curation" className="luxury-card-img" />
+                <img src={import.meta.env.BASE_URL + "assets/collection_jewellery.png"} alt="Sculptural jewelry" className="luxury-card-img" />
               </div>
-              <div className="luxury-card-content">
+              <div className="luxury-card-content" style={{ padding: '1.5rem 0' }}>
                 <span className="luxury-card-subtitle">Craftsmanship</span>
                 <h3 className="luxury-card-title" style={{ fontSize: '1.4rem' }}>Inspired by Nature</h3>
-                <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginTop: '0.5rem' }}>Crafting precious objects directly inspired by eroded coastlines, pebbles, and shifting sands.</p>
+                <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginTop: '0.5rem' }}>Drafting jewellery directly from organic eroded coastal shapes and natural stone contours.</p>
               </div>
             </div>
           </div>

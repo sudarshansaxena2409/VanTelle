@@ -1,225 +1,29 @@
 import React, { useState } from 'react';
-import { Heart, X } from 'lucide-react';
-
-const PRODUCT_DATABASE = [
-  // Jewellery
-  {
-    id: 'j1',
-    category: 'Jewellery',
-    name: 'Aurum Pendant',
-    price: 220,
-    img: import.meta.env.BASE_URL + 'assets/collection_jewellery.png',
-    desc: 'A fluid expression of elegance. The Aurum Pendant symbolizes inner strength and effortless beauty, suspended on a delicate 18k gold chain.',
-    material: '18k Gold Plated',
-    origin: 'Handcrafted in Florence, Italy',
-    details: 'Each pendant is individually cast in solid brass and layered with a thick coating of 18k champagne gold. Designed to rest beautifully on the collarbone.',
-    care: 'Avoid contact with moisture, perfumes, and keep in its protective suede bag.'
-  },
-  {
-    id: 'j2',
-    category: 'Jewellery',
-    name: 'Luna Hoops',
-    price: 180,
-    img: import.meta.env.BASE_URL + 'assets/collection_jewellery.png',
-    desc: 'Inspired by the crescent moon, these hoops present a textured, organic surface that captures light dynamically.',
-    material: '18k Gold Plated',
-    origin: 'Handcrafted in Vicenza, Italy',
-    details: 'Features a secure click-closure. Extremely lightweight despite their sculptural presence, making them suitable for all-day comfort.',
-    care: 'Gently polish with a dry microfibre cloth after each wear.'
-  },
-  {
-    id: 'j3',
-    category: 'Jewellery',
-    name: 'Luxe Chain Bracelet',
-    price: 260,
-    img: import.meta.env.BASE_URL + 'assets/collection_jewellery.png',
-    desc: 'An assembly of custom-cast fluid links, representing connection and fluid luxury. The perfect layering companion.',
-    material: '18k Gold Plated & Sterling Silver',
-    origin: 'Handcrafted in Milan, Italy',
-    details: 'Features an adjustable clasp with our signature VanTelle laser-engraved tag.',
-    care: 'Clean with a professional silver cloth to preserve the mixed-metal shine.'
-  },
-  {
-    id: 'j4',
-    category: 'Jewellery',
-    name: 'Sofia Ring',
-    price: 160,
-    img: import.meta.env.BASE_URL + 'assets/collection_jewellery.png',
-    desc: 'A chunky, hand-sculpted organic band embedded with a single cushion-cut white quartz crystal.',
-    material: '18k Gold Plated with Quartz',
-    origin: 'Handcrafted in Tuscany, Italy',
-    details: 'Each quartz stone is ethically sourced and unique in its natural internal inclusions, making every single Sofia ring completely distinct.',
-    care: 'Do not submerge in water or wear during high-impact tasks.'
-  },
-  {
-    id: 'j5',
-    category: 'Jewellery',
-    name: 'Perla Drops',
-    price: 190,
-    img: import.meta.env.BASE_URL + 'assets/collection_jewellery.png',
-    desc: 'Generous baroque pearls hanging from sculptural organic gold studs. An update to the classic drop earring.',
-    material: 'Freshwater Baroque Pearls, 18k Gold',
-    origin: 'Handcrafted in Amalfi, Italy',
-    details: 'Baroque pearls are selected by hand for their unique, uneven shapes and brilliant luster.',
-    care: 'Keep separate from other metals to prevent scratching the pearl surface.'
-  },
-  {
-    id: 'j6',
-    category: 'Jewellery',
-    name: 'Celestia Necklace',
-    price: 240,
-    img: import.meta.env.BASE_URL + 'assets/collection_jewellery.png',
-    desc: 'Delicate constellation links meeting a central brilliant-cut white sapphire.',
-    material: '18k Gold, Sapphire',
-    origin: 'Handcrafted in Milan, Italy',
-    details: 'Length: 42cm with 3cm adjuster. Sapphire is bezel-set to lay flat against the skin.',
-    care: 'Professional dry jewelry cleaning recommended annually.'
-  },
-
-  // Clothing / Fashion
-  {
-    id: 'f1',
-    category: 'Fashion',
-    name: 'Linen Wrap Dress',
-    price: 320,
-    img: import.meta.env.BASE_URL + 'assets/vantelle_hero.png',
-    desc: 'Crafted from 100% premium Italian linen. A relaxed silhouette with refined tailoring details and an elegant waist tie.',
-    material: '100% Organic Linen',
-    origin: 'Tailored in Como, Italy',
-    details: 'Features side seam pockets, a beautiful structural lapel, and a double-faced linen belt. Breathable, luxury structure that softens with age.',
-    care: 'Dry clean only. Cool iron on reverse side.'
-  },
-  {
-    id: 'f2',
-    category: 'Fashion',
-    name: 'Silk Oversized Shirt',
-    price: 290,
-    img: import.meta.env.BASE_URL + 'assets/vantelle_hero.png',
-    desc: 'Liquid silk georgette that drapes beautifully. Cut for a relaxed, modern fit with extra wide French cuffs.',
-    material: '100% Mulberry Silk',
-    origin: 'Tailored in Lyon, France',
-    details: 'Mother-of-pearl buttons, hidden button placket, drop-shoulder styling, and a clean back box pleat.',
-    care: 'Hand wash cold with silk detergent, lay flat to dry in shade.'
-  },
-  {
-    id: 'f3',
-    category: 'Fashion',
-    name: 'Cashmere Knit Top',
-    price: 380,
-    img: import.meta.env.BASE_URL + 'assets/vantelle_hero.png',
-    desc: 'Sumptuously soft, fine-gauge cashmere knit with a mock turtleneck. Designed as a luxury layer for changing seasons.',
-    material: '100% Mongolian Cashmere',
-    origin: 'Knit in Hawick, Scotland',
-    details: 'Ribbed collar, cuffs, and hem. Sourced sustainably from ethical herder cooperatives.',
-    care: 'Hand wash cold or dry clean. Store folded, never hanging.'
-  },
-  {
-    id: 'f4',
-    category: 'Fashion',
-    name: 'Wool Blend Coat',
-    price: 650,
-    img: import.meta.env.BASE_URL + 'assets/vantelle_hero.png',
-    desc: 'An oversized double-breasted coat made from structural virgin wool and cashmere. The definition of timeless luxury.',
-    material: '85% Virgin Wool, 15% Cashmere',
-    origin: 'Tailored in London, UK',
-    details: 'Fully lined with custom silk satin. Features structured shoulders, back vent, and deep pockets.',
-    care: 'Professional dry clean only.'
-  },
-  {
-    id: 'f5',
-    category: 'Fashion',
-    name: 'Silk Slip Dress',
-    price: 420,
-    img: import.meta.env.BASE_URL + 'assets/vantelle_hero.png',
-    desc: 'Cut on the bias for a fluid, body-skimming fit. An elegant low-back design with delicate cross-straps.',
-    material: '100% Sandwashed Silk',
-    origin: 'Tailored in Milan, Italy',
-    details: 'Finished with fine hand-rolled hems. Beautiful matte finish that reflects light subtly.',
-    care: 'Dry clean recommended.'
-  },
-
-  // Home Décor
-  {
-    id: 'h1',
-    category: 'Home Décor',
-    name: 'Travertine Bowl',
-    price: 180,
-    img: import.meta.env.BASE_URL + 'assets/hovofaber_collab.png',
-    desc: 'A solid block of Tuscan travertine, hand-carved to highlight the raw, porous beauty and organic cream tones of natural stone.',
-    material: 'Natural Tuscan Travertine',
-    origin: 'Carved in Carrara, Italy',
-    details: 'Each bowl features distinct natural cavities, veins, and quartz crystallization. Matte, unpolished exterior.',
-    care: 'Wipe with a damp cloth. Do not use acidic cleaners.'
-  },
-  {
-    id: 'h2',
-    category: 'Home Décor',
-    name: 'Handcrafted Ceramic Vase',
-    price: 150,
-    img: import.meta.env.BASE_URL + 'assets/hovofaber_collab.png',
-    desc: 'An editorial ceramic vessel with a raw sandy texture, finished with a subtle satin white interior glaze.',
-    material: 'Local Stoneware Clay',
-    origin: 'Hand-thrown in Cornwall, UK',
-    details: 'Thrown on a traditional foot-powered kick wheel. Perfect for holding dried botanicals or standing as a sculptural piece.',
-    care: 'Hand wash only.'
-  },
-  {
-    id: 'h3',
-    category: 'Home Décor',
-    name: 'Linen Throw Blanket',
-    price: 210,
-    img: import.meta.env.BASE_URL + 'assets/hovofaber_collab.png',
-    desc: 'Generously sized throw woven from thick, textured flax fibers. Adds organic depth and tactile luxury to any sofa or bed.',
-    material: '100% Belgian Flax Linen',
-    origin: 'Woven in Ghent, Belgium',
-    details: 'Features raw fringed edges. Pre-washed for a soft, tactile touch.',
-    care: 'Machine wash gentle, tumble dry low for organic texture.'
-  },
-  {
-    id: 'h4',
-    category: 'Home Décor',
-    name: 'Scented Candle - Oud',
-    price: 95,
-    img: import.meta.env.BASE_URL + 'assets/hovofaber_collab.png',
-    desc: 'An intoxicating blend of rare agarwood (oud), cedar, black pepper, and warm amber. Poured in a custom ceramic cup.',
-    material: 'Soy Wax, Hand-thrown Ceramic Vessel',
-    origin: 'Poured in Grasse, France',
-    details: 'Burn time: approximately 60 hours. Once finished, the stoneware vessel functions beautifully as a luxury espresso cup.',
-    care: 'Trim wick to 5mm before each lighting.'
-  },
-  {
-    id: 'h5',
-    category: 'Home Décor',
-    name: 'Brass Table Lamp',
-    price: 450,
-    img: import.meta.env.BASE_URL + 'assets/hovofaber_collab.png',
-    desc: 'A minimal table lamp constructed from solid brushed brass, reflecting a warm, indirect glow from its curved dome shade.',
-    material: 'Solid Brushed Brass',
-    origin: 'Handcrafted in Birmingham, UK',
-    details: 'Features a textile cord and an inline dimmer switch. Designed to patina beautifully over time.',
-    care: 'Dust with a soft microfiber cloth.'
-  }
-];
+import { Heart, X, Sparkles, MapPin, ShieldCheck, ArrowRight, MessageSquare } from 'lucide-react';
+import { PRODUCT_DATABASE, PRODUCT_CATEGORIES, getRelatedProducts } from '../data/products';
 
 export default function Collections({ setActivePage }) {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  const categories = ['All', 'Jewellery', 'Fashion', 'Home Décor'];
+  const categories = PRODUCT_CATEGORIES;
 
   const filteredProducts = PRODUCT_DATABASE
     .filter(p => selectedCategory === 'All' || p.category === selectedCategory);
 
   const handleProductClick = (product) => {
     setSelectedProduct(product);
+    setActiveImageIndex(0);
   };
 
-  // Get similar products for recommendation
-  const getRecommendations = (currentProduct) => {
-    return PRODUCT_DATABASE
-      .filter(p => p.category === currentProduct.category && p.id !== currentProduct.id)
-      .slice(0, 3);
+  const handleInquire = (product) => {
+    // Navigate to Contact page for luxury inquiry
+    setSelectedProduct(null);
+    setActivePage('contact');
   };
+
+  const recommendations = selectedProduct ? getRelatedProducts(selectedProduct, 3) : [];
 
   return (
     <div 
@@ -231,106 +35,118 @@ export default function Collections({ setActivePage }) {
       }}
     >
       
-      {/* HEADER STATEMENT */}
+      {/* 1. EDITORIAL HEADER STATEMENT (Document Section 3) */}
       <section style={{ padding: '4rem 0 2rem 0' }}>
         <div className="container" style={{ textAlign: 'center' }}>
-          <span className="editorial-subtitle">The Catalogue</span>
-          <h1 className="editorial-title" style={{ fontSize: '3rem', marginBottom: '1.5rem' }}>
-            Curated Portfolios
+          <span className="editorial-subtitle">The Curated Catalogue</span>
+          <h1 className="editorial-title" style={{ fontSize: '3.4rem', marginBottom: '1.25rem' }}>
+            Jewellery, Fashion & Home Décor
           </h1>
-          <p style={{ maxWidth: '600px', margin: '0 auto', fontSize: '0.95rem' }}>
-            Explore limited runs of premium lifestyle designs. Each piece is hand-crafted and traceable back to the individual workshop.
+          <p style={{ maxWidth: '640px', margin: '0 auto', fontSize: '1rem', color: 'var(--color-text-muted)', lineHeight: '1.8' }}>
+            A unified expression of individuality. Each creation is developed in collaboration with independent artisans, honoring generational techniques and tactile luxury.
           </p>
         </div>
       </section>
 
-      {/* FILTER & SORT CONTROLS */}
-      <section style={{ borderBottom: '1px solid rgba(26,26,26,0.06)', paddingBottom: '1.5rem', marginBottom: '3rem' }}>
-        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1.5rem' }}>
-          {/* Category Tabs */}
-          <div style={{ display: 'flex', gap: '1.5rem' }}>
-            {categories.map(cat => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                style={{
-                  fontSize: '0.8rem',
-                  fontWeight: selectedCategory === cat ? '500' : '300',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.15em',
-                  padding: '0.5rem 0',
-                  borderBottom: selectedCategory === cat ? '1px solid var(--color-accent-gold)' : '1px solid transparent',
-                  cursor: 'pointer',
-                  color: selectedCategory === cat ? 'var(--color-accent-gold)' : 'var(--color-text-dark)',
-                  transition: 'var(--transition-fast)'
-                }}
+      {/* 2. CATEGORY SELECTION TABS */}
+      <section style={{ borderBottom: '1px solid rgba(26,26,26,0.06)', paddingBottom: '1.5rem', marginBottom: '3.5rem' }}>
+        <div className="container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', gap: '2rem' }}>
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              style={{
+                fontSize: '0.85rem',
+                textTransform: 'uppercase',
+                letterSpacing: '0.15em',
+                padding: '0.5rem 0',
+                cursor: 'pointer',
+                fontWeight: selectedCategory === cat ? '600' : '400',
+                color: selectedCategory === cat ? 'var(--color-text-dark)' : 'var(--color-text-muted)',
+                borderBottom: selectedCategory === cat ? '2px solid var(--color-accent-gold)' : '2px solid transparent',
+                transition: 'var(--transition-fast)'
+              }}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {/* 3. PRODUCT GRID — CLEAN & SPACIOUS WITH MINIMAL CARD INFO (Document Section 3) */}
+      <section style={{ paddingBottom: '8rem' }}>
+        <div className="container">
+          <div className="grid-3" style={{ rowGap: '4.5rem', columnGap: '2.5rem' }}>
+            {filteredProducts.map((product) => (
+              <div 
+                key={product.id} 
+                className="luxury-card"
+                onClick={() => handleProductClick(product)}
+                style={{ cursor: 'pointer' }}
               >
-                {cat}
-              </button>
+                {/* Large 3:4 Portrait Image */}
+                <div 
+                  className="luxury-card-img-wrapper" 
+                  style={{ 
+                    aspectRatio: '3/4', 
+                    borderRadius: '4px',
+                    backgroundColor: 'var(--color-bg-warm)',
+                    overflow: 'hidden'
+                  }}
+                >
+                  <img 
+                    src={product.image} 
+                    alt={product.name} 
+                    className="luxury-card-img" 
+                    style={{ transition: 'transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)' }}
+                  />
+                  <div className="luxury-card-overlay" />
+                  
+                  {/* Subtle category tag badge on hover */}
+                  <span 
+                    style={{
+                      position: 'absolute',
+                      top: '1.25rem',
+                      left: '1.25rem',
+                      fontSize: '0.65rem',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.15em',
+                      backgroundColor: 'rgba(255, 255, 255, 0.85)',
+                      backdropFilter: 'blur(4px)',
+                      padding: '0.35rem 0.75rem',
+                      borderRadius: '2px',
+                      color: 'var(--color-text-dark)',
+                      fontWeight: '500'
+                    }}
+                  >
+                    {product.category}
+                  </span>
+                </div>
+
+                {/* Minimal Card Information per Luxury Guidelines */}
+                <div className="luxury-card-content" style={{ padding: '1.25rem 0 0 0' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                    <span className="luxury-card-subtitle" style={{ fontSize: '0.7rem', color: 'var(--color-accent-gold)' }}>
+                      {product.tagline}
+                    </span>
+                    <span style={{ fontSize: '0.95rem', fontWeight: '400', fontFamily: 'var(--font-serif)', color: 'var(--color-text-dark)' }}>
+                      {product.currency}{product.price}
+                    </span>
+                  </div>
+                  <h3 className="luxury-card-title" style={{ fontSize: '1.45rem', marginTop: '0.35rem', fontWeight: '400' }}>
+                    {product.name}
+                  </h3>
+                  <p style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', marginTop: '0.25rem' }}>
+                    {product.origin}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
-
-          {/* Product Count */}
-          <div style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', letterSpacing: '0.05em' }}>
-            {filteredProducts.length} Products
-          </div>
         </div>
       </section>
 
-      {/* PRODUCTS GRID */}
-      <section style={{ paddingBottom: '6rem' }}>
-        <div className="container">
-          {filteredProducts.length > 0 ? (
-            <div className="grid-4">
-              {filteredProducts.map(product => (
-                <div 
-                  key={product.id} 
-                  className="luxury-card" 
-                  onClick={() => handleProductClick(product)}
-                >
-                  <div className="luxury-card-img-wrapper">
-                    <img src={product.img} alt={product.name} className="luxury-card-img" />
-                    <div className="luxury-card-overlay" />
-                    {/* Add to wishlist icon shortcut */}
-                    <button 
-                      style={{ 
-                        position: 'absolute', 
-                        top: '1rem', 
-                        right: '1rem', 
-                        backgroundColor: 'rgba(247, 245, 242, 0.9)', 
-                        padding: '0.5rem', 
-                        borderRadius: '50%',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        zIndex: 3
-                      }}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        alert(`${product.name} added to your wishlist.`);
-                      }}
-                    >
-                      <Heart size={14} />
-                    </button>
-                  </div>
-                  <div className="luxury-card-content" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                    <div>
-                      <span className="luxury-card-subtitle">{product.category}</span>
-                      <h3 className="luxury-card-title" style={{ fontSize: '1.2rem', marginTop: '0.2rem' }}>{product.name}</h3>
-                    </div>
-                    <span className="luxury-card-price" style={{ fontWeight: '500', fontSize: '0.95rem' }}>€ {product.price}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div style={{ textAlign: 'center', padding: '6rem 0' }}>
-              <p>No products found matching the criteria.</p>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* INTERACTIVE PRODUCT DETAIL DRAWER / SLIDER MODAL */}
+      {/* 4. DETAILED PRODUCT PAGE DRAWER (Document Section 3 & RI5 Reference) */}
       {selectedProduct && (
         <div 
           style={{
@@ -339,16 +155,16 @@ export default function Collections({ setActivePage }) {
             left: 0,
             width: '100vw',
             height: '100vh',
-            backgroundColor: 'rgba(26, 26, 26, 0.4)',
-            backdropFilter: 'blur(5px)',
-            zIndex: 1100,
+            backgroundColor: 'rgba(20, 20, 20, 0.55)',
+            backdropFilter: 'blur(8px)',
+            zIndex: 2000,
             display: 'flex',
             justifyContent: 'flex-end',
             animation: 'fadeIn 0.3s ease'
           }}
           onClick={() => setSelectedProduct(null)}
         >
-          {/* Drawer content box */}
+          {/* Drawer Inner Container */}
           <div 
             style={{
               width: '100%',
@@ -356,22 +172,18 @@ export default function Collections({ setActivePage }) {
               height: '100%',
               backgroundColor: 'var(--color-bg-light)',
               overflowY: 'auto',
-              padding: '4rem 3rem',
+              padding: '4rem 4rem',
               position: 'relative',
-              boxShadow: '-10px 0 30px rgba(0,0,0,0.15)',
+              boxShadow: '-10px 0 40px rgba(0,0,0,0.2)',
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'space-between',
               animation: 'slideLeft 0.5s cubic-bezier(0.25, 1, 0.5, 1)'
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
+            {/* Close Icon */}
             <button 
-              onClick={(e) => {
-                e.stopPropagation();
-                setSelectedProduct(null);
-              }}
+              onClick={() => setSelectedProduct(null)}
               style={{
                 position: 'absolute',
                 top: '2rem',
@@ -379,118 +191,168 @@ export default function Collections({ setActivePage }) {
                 cursor: 'pointer',
                 padding: '0.5rem',
                 display: 'flex',
-                zIndex: 100
+                zIndex: 10,
+                color: 'var(--color-text-dark)'
               }}
+              title="Close Drawer"
             >
-              <X size={22} strokeWidth={1.5} />
+              <X size={24} strokeWidth={1.5} />
             </button>
 
-            <div>
-              {/* Product Visual Details */}
+            {/* Product Gallery & Details Grid */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+              
+              {/* Category, Title & Price */}
+              <div>
+                <span className="editorial-subtitle" style={{ color: 'var(--color-accent-gold)' }}>
+                  {selectedProduct.category} — {selectedProduct.tagline}
+                </span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginTop: '0.5rem', flexWrap: 'wrap', gap: '1rem' }}>
+                  <h2 style={{ fontSize: '2.8rem', fontFamily: 'var(--font-serif)', fontWeight: '400', lineHeight: '1.1' }}>
+                    {selectedProduct.name}
+                  </h2>
+                  <span style={{ fontSize: '1.75rem', fontFamily: 'var(--font-serif)', color: 'var(--color-text-dark)', fontWeight: '400' }}>
+                    {selectedProduct.currency}{selectedProduct.price}
+                  </span>
+                </div>
+              </div>
+
+              {/* Large Product Imagery + Multi-Image Thumbnail Gallery (Document Section 3: close-ups highlighting textures) */}
+              <div>
+                <div 
+                  style={{ 
+                    aspectRatio: '4/3', 
+                    borderRadius: '4px', 
+                    overflow: 'hidden', 
+                    backgroundColor: 'var(--color-bg-warm)',
+                    marginBottom: '1rem'
+                  }}
+                >
+                  <img 
+                    src={selectedProduct.gallery && selectedProduct.gallery[activeImageIndex] 
+                      ? selectedProduct.gallery[activeImageIndex] 
+                      : selectedProduct.image} 
+                    alt={selectedProduct.name} 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                  />
+                </div>
+
+                {/* Close-up Texture Thumbnails */}
+                {selectedProduct.gallery && selectedProduct.gallery.length > 1 && (
+                  <div style={{ display: 'flex', gap: '0.75rem' }}>
+                    {selectedProduct.gallery.map((img, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setActiveImageIndex(idx)}
+                        style={{
+                          width: '70px',
+                          height: '70px',
+                          borderRadius: '3px',
+                          overflow: 'hidden',
+                          border: activeImageIndex === idx ? '2px solid var(--color-accent-gold)' : '1px solid var(--color-bg-greige)',
+                          cursor: 'pointer',
+                          padding: 0,
+                          opacity: activeImageIndex === idx ? 1 : 0.65,
+                          transition: 'var(--transition-fast)'
+                        }}
+                      >
+                        <img src={img} alt="Texture preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Editorial Description */}
+              <div>
+                <h4 style={{ fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--color-text-muted)', marginBottom: '0.75rem', fontWeight: '600' }}>
+                  The Narrative
+                </h4>
+                <p style={{ fontSize: '1.05rem', lineHeight: '1.8', color: 'var(--color-text-dark)', fontWeight: '300' }}>
+                  {selectedProduct.desc}
+                </p>
+              </div>
+
+              {/* Specifications & Craftsmanship Badges */}
               <div 
                 style={{ 
-                  display: 'grid', 
-                  gridTemplateColumns: '1.2fr 1fr', 
-                  gap: '3rem', 
-                  marginBottom: '4rem' 
+                  backgroundColor: 'var(--color-bg-warm)', 
+                  padding: '2rem', 
+                  borderRadius: '4px',
+                  border: '1px solid var(--color-bg-greige)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '1.25rem'
                 }}
-                className="drawer-split"
               >
-                {/* Image Showcase */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                  <div style={{ aspectRatio: '3/4', overflow: 'hidden', backgroundColor: 'var(--color-bg-warm)', borderRadius: '4px' }}>
-                    <img 
-                      src={selectedProduct.img} 
-                      alt={selectedProduct.name} 
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-                    />
-                  </div>
-                  {/* Thumbnails grid */}
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem' }}>
-                    <div style={{ aspectRatio: '1/1', border: '1px solid var(--color-accent-gold)', borderRadius: '2px', overflow: 'hidden', cursor: 'pointer' }}>
-                      <img src={selectedProduct.img} alt="Thumb 1" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.8 }} />
-                    </div>
-                    <div style={{ aspectRatio: '1/1', backgroundColor: 'var(--color-bg-warm)', borderRadius: '2px', overflow: 'hidden', cursor: 'pointer', display: 'flex', alignItems: 'center', justify: 'center' }}>
-                      <img src={selectedProduct.img} alt="Thumb 2" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(100%)', opacity: 0.5 }} />
-                    </div>
-                    <div style={{ aspectRatio: '1/1', backgroundColor: 'var(--color-bg-warm)', borderRadius: '2px', overflow: 'hidden', cursor: 'pointer', display: 'flex', alignItems: 'center', justify: 'center' }}>
-                      <img src={selectedProduct.img} alt="Thumb 3" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'sepia(30%)', opacity: 0.5 }} />
-                    </div>
+                <div>
+                  <span style={{ fontSize: '0.7rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-accent-gold)', display: 'block', marginBottom: '0.25rem' }}>
+                    Artisan Origin
+                  </span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: '500', fontSize: '0.95rem' }}>
+                    <MapPin size={16} />
+                    <span>{selectedProduct.origin}</span>
                   </div>
                 </div>
 
-                {/* Narrative Details */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                  <div>
-                    <span style={{ fontSize: '0.75rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--color-accent-gold)' }}>
-                      {selectedProduct.category}
-                    </span>
-                    <h2 style={{ fontSize: '2.4rem', marginTop: '0.25rem', marginBottom: '0.5rem', lineHeight: '1.2' }}>
-                      {selectedProduct.name}
-                    </h2>
-                    <span style={{ fontSize: '1.4rem', fontWeight: '400', color: 'var(--color-text-dark)' }}>
-                      € {selectedProduct.price}
-                    </span>
-                  </div>
-
-                  <p style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)', lineHeight: '1.7' }}>
-                    {selectedProduct.desc}
-                  </p>
-
-                  <div style={{ borderTop: '1px solid rgba(26,26,26,0.06)', paddingTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.85rem' }}>
-                    <div><strong>Materials:</strong> <span style={{ color: 'var(--color-text-muted)', fontWeight: '300' }}>{selectedProduct.material}</span></div>
-                    <div><strong>Provenance:</strong> <span style={{ color: 'var(--color-text-muted)', fontWeight: '300' }}>{selectedProduct.origin}</span></div>
-                    <div><strong>Crafting Details:</strong> <span style={{ color: 'var(--color-text-muted)', fontWeight: '300' }}>{selectedProduct.details}</span></div>
-                  </div>
-
-                  {/* Luxury Inquire block (replacing cart checkout) */}
-                  <div style={{ borderTop: '1px solid rgba(26,26,26,0.06)', paddingTop: '1.5rem', marginTop: '1.5rem' }}>
-                    <button 
-                      onClick={() => {
-                        setSelectedProduct(null);
-                        setActivePage('contact');
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                      }}
-                      className="btn-primary"
-                      style={{ width: '100%', padding: '1rem', textAlign: 'center' }}
-                    >
-                      Inquire via Concierge
-                    </button>
-                  </div>
+                <div>
+                  <span style={{ fontSize: '0.7rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-accent-gold)', display: 'block', marginBottom: '0.25rem' }}>
+                    Materiality
+                  </span>
+                  <p style={{ fontSize: '0.9rem', color: 'var(--color-text-dark)' }}>{selectedProduct.material}</p>
                 </div>
 
-              </div>
+                <div>
+                  <span style={{ fontSize: '0.7rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-accent-gold)', display: 'block', marginBottom: '0.25rem' }}>
+                    Specifications & Finishing
+                  </span>
+                  <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', lineHeight: '1.6' }}>{selectedProduct.details}</p>
+                </div>
 
-              {/* Recommendations */}
-              <div style={{ borderTop: '1px solid rgba(26,26,26,0.06)', paddingTop: '3rem', marginTop: '3rem' }}>
-                <h4 style={{ 
-                  fontSize: '0.8rem', 
-                  fontFamily: 'var(--font-sans)', 
-                  textTransform: 'uppercase', 
-                  letterSpacing: '0.15em', 
-                  color: 'var(--color-accent-gold)',
-                  marginBottom: '2rem'
-                }}>
-                  You May Also Like
-                </h4>
-                <div className="grid-3">
-                  {getRecommendations(selectedProduct).map(rec => (
-                    <div 
-                      key={rec.id} 
-                      className="luxury-card"
-                      onClick={() => handleProductClick(rec)}
-                    >
-                      <div className="luxury-card-img-wrapper" style={{ aspectRatio: '4/5' }}>
-                        <img src={rec.img} alt={rec.name} className="luxury-card-img" />
-                      </div>
-                      <div style={{ padding: '1rem 0 0 0', display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem' }}>
-                        <h5 style={{ fontFamily: 'var(--font-serif)', fontSize: '1rem' }}>{rec.name}</h5>
-                        <span>€ {rec.price}</span>
-                      </div>
-                    </div>
-                  ))}
+                <div>
+                  <span style={{ fontSize: '0.7rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-accent-gold)', display: 'block', marginBottom: '0.25rem' }}>
+                    Care & Longevity
+                  </span>
+                  <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', lineHeight: '1.6' }}>{selectedProduct.care}</p>
                 </div>
               </div>
+
+              {/* Inquire Action (Editorial luxury concierge inquiry, no checkout) */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', paddingTop: '1rem' }}>
+                <button 
+                  onClick={() => handleInquire(selectedProduct)}
+                  className="btn-primary" 
+                  style={{ width: '100%', padding: '1.2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem' }}
+                >
+                  <MessageSquare size={18} />
+                  <span>Inquire with VanTelle Concierge</span>
+                </button>
+                <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', textAlign: 'center' }}>
+                  Each piece is handcrafted in limited runs. Inquiries receive personalized advice within 24 hours.
+                </p>
+              </div>
+
+              {/* Related Curated Pieces */}
+              {recommendations.length > 0 && (
+                <div style={{ marginTop: '2rem', borderTop: '1px solid rgba(26,26,26,0.06)', paddingTop: '2.5rem' }}>
+                  <span className="editorial-subtitle" style={{ marginBottom: '1.5rem', display: 'block' }}>Complementary Pieces</span>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
+                    {recommendations.map((rec) => (
+                      <div 
+                        key={rec.id} 
+                        onClick={() => handleProductClick(rec)}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        <div style={{ aspectRatio: '3/4', borderRadius: '3px', overflow: 'hidden', backgroundColor: 'var(--color-bg-warm)', marginBottom: '0.5rem' }}>
+                          <img src={rec.image} alt={rec.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        </div>
+                        <h5 style={{ fontSize: '0.9rem', fontWeight: '400' }}>{rec.name}</h5>
+                        <span style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', fontFamily: 'var(--font-serif)' }}>{rec.currency}{rec.price}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
             </div>
           </div>
@@ -502,11 +364,7 @@ export default function Collections({ setActivePage }) {
           from { transform: translateX(100%); }
           to { transform: translateX(0); }
         }
-        @media (max-width: 768px) {
-          .drawer-split {
-            grid-template-columns: 1fr !important;
-            gap: 2rem !important;
-          }
+        @media (max-width: 900px) {
           div[style*="width: 100%"][style*="maxWidth: 850px"] {
             padding: 3rem 1.5rem !important;
           }
