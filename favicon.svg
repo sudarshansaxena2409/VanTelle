@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="14" fill="#141414" />
+  <!-- VanTelle Intertwined V & T Monogram Brand Symbol -->
+  <path 
+    d="M 16 20 C 22 20, 26 25, 29 36 C 31 43, 33 48, 36 48 C 39 48, 43 41, 47 28 C 49 23, 50 20, 52 20" 
+    stroke="#97ABFF" 
+    stroke-width="3" 
+    stroke-linecap="round" 
+    stroke-linejoin="round" 
+    fill="none" 
+  />
+  <path 
+    d="M 23 27 C 32 23, 41 21, 50 21" 
+    stroke="#C5A880" 
+    stroke-width="2.5" 
+    stroke-linecap="round" 
+    fill="none" 
+  />
+  <path 
+    d="M 36 21 L 27 49" 
+    stroke="#F7F5F2" 
+    stroke-width="3" 
+    stroke-linecap="round" 
+    fill="none" 
+  />
+  <circle cx="36" cy="21" r="2" fill="#97ABFF" />
+</svg>
